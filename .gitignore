@@ -1,0 +1,4 @@
+Gemfile*
+*.gem
+*.gemspec
+greenmonster_test_games

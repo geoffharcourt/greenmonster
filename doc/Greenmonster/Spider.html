@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class Greenmonster::Spider - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../index.html">Home</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/greenmonster.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">Object
+  
+</nav>
+
+    <!-- Included Modules -->
+<nav id="includes-section" class="section">
+  <h3 class="section-header">Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><span class="include">HTTParty</span>
+  
+  
+  </ul>
+</nav>
+
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-pull">::pull</a>
+    
+    <li><a href="#method-c-pull_days">::pull_days</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../Greenmonster.html">Greenmonster</a>
+  
+    <li><a href="../Greenmonster/Spider.html">Greenmonster::Spider</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class Greenmonster::Spider</h1>
+
+  <div id="description" class="description">
+    
+<p>The Gameday XML <a href="Spider.html">Spider</a> utility</p>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-pull" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">pull</span><span
+            class="method-args">(args = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Pull Gameday XML files for a given date. The args hash passes arguments
+like games_folder location on to <a
+href="Spider.html#method-c-pull">::pull</a>. Default options for the spider
+are to pull games with sport_code of ‘mlb’ (games played by MLB games
+rather than MiLB teams or  foreign teams) and to pull games on the current
+date. You must specify a :games_folder argument that is the root folder
+under  which all games will be placed.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-comment"># Pull games from July 4, 2011</span>
+<span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Gameday</span><span class="ruby-operator">::</span><span class="ruby-constant">Spider</span>.<span class="ruby-identifier">pull</span>({:<span class="ruby-identifier">date</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2011</span>,<span class="ruby-value">7</span>,<span class="ruby-value">1</span>), :<span class="ruby-identifier">games_location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'/Users/geoff/games'</span>})
+</pre>
+
+<p>Arguments:</p>
+
+<pre>args: (Hash)</pre>
+          
+
+          
+          <div class="method-source-code" id="pull-source">
+            <pre><span class="ruby-comment"># File lib/greenmonster.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">pull</span>(<span class="ruby-identifier">args</span> = {})
+  <span class="ruby-identifier">args</span> = {
+    <span class="ruby-value">:date</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>,
+    <span class="ruby-value">:league</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'mlb'</span>
+  }.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">args</span>)
+  
+  <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Games folder location required.&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:games_folder</span>].<span class="ruby-identifier">nil?</span>
+  
+  <span class="ruby-identifier">game_day_url_for_date</span> = <span class="ruby-node">&quot;http://gd2.mlb.com/components/game/#{args[:league]}/#{format_date_as_folder(args[:date])}&quot;</span>
+  
+  <span class="ruby-comment"># Iterate through every hyperlink on the page.</span>
+  <span class="ruby-comment"># These links represent the individual game folders</span>
+  <span class="ruby-comment"># for each date. Reject any links that aren't to game</span>
+  <span class="ruby-comment"># folders or that are to what look like backup game</span>
+  <span class="ruby-comment"># folders.</span>
+  (<span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">game_day_url_for_date</span>))<span class="ruby-operator">/</span><span class="ruby-string">&quot;a&quot;</span>).<span class="ruby-identifier">reject</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">l</span><span class="ruby-operator">|</span> <span class="ruby-identifier">l</span>.<span class="ruby-identifier">attribute</span>(<span class="ruby-string">'href'</span>).<span class="ruby-identifier">value</span>[<span class="ruby-value">0</span>,<span class="ruby-value">4</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;gid_&quot;</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">l</span>.<span class="ruby-identifier">attribute</span>(<span class="ruby-string">'href'</span>).<span class="ruby-identifier">value</span>[<span class="ruby-value">-5</span>,<span class="ruby-value">4</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;_bak&quot;</span>}.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attribute</span>(<span class="ruby-string">'href'</span>).<span class="ruby-identifier">value</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-string">'/'</span>,<span class="ruby-string">''</span>)
+    
+    <span class="ruby-identifier">paths</span> = {
+      <span class="ruby-value">:localGameFolder</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{args[:games_folder]}/#{args[:league]}/#{format_date_as_folder(args[:date])}/#{e.attribute('href').value}&quot;</span>,
+      <span class="ruby-value">:mlbGameFolder</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{game_day_url_for_date}/#{e.attribute('href').value}&quot;</span>
+    }
+    
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-identifier">paths</span>[<span class="ruby-value">:localGameFolder</span>] <span class="ruby-operator">+</span> <span class="ruby-string">'inning'</span>
+
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">copyGameDayXML</span>(<span class="ruby-string">'linescore.xml'</span>,<span class="ruby-identifier">paths</span>)
+    
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>[<span class="ruby-value">:date</span>].<span class="ruby-identifier">year</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">2007</span>
+        <span class="ruby-identifier">copyGameDayXML</span>(<span class="ruby-string">'inning_all.xml'</span>,<span class="ruby-identifier">paths</span>)
+        <span class="ruby-identifier">copyGameDayXML</span>(<span class="ruby-string">'inning_hit.xml'</span>,<span class="ruby-identifier">paths</span>)
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-comment"># Iterate through the inning files, but skip inning </span>
+        <span class="ruby-comment"># files numbered 0 (some bad spring training data).</span>
+        <span class="ruby-comment"># Necessary for games prior to 2008 because there is</span>
+        <span class="ruby-comment"># no inning_all.xml file in older games.</span>
+        (<span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">get</span>(<span class="ruby-node">&quot;#{paths[:mlbGameFolder]}/inning/&quot;</span>).<span class="ruby-identifier">body</span>).<span class="ruby-identifier">search</span>(<span class="ruby-string">'a'</span>)).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ic</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">copyGameDayXML</span>(<span class="ruby-identifier">ic</span>.<span class="ruby-identifier">attribute</span>(<span class="ruby-string">'href'</span>).<span class="ruby-identifier">value</span>,<span class="ruby-identifier">paths</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">ic</span>.<span class="ruby-identifier">attribute</span>(<span class="ruby-string">'href'</span>).<span class="ruby-identifier">value</span>[<span class="ruby-value">-3</span>,<span class="ruby-value">3</span>]  <span class="ruby-operator">==</span> <span class="ruby-string">&quot;xml&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">ic</span>.<span class="ruby-identifier">attribute</span>(<span class="ruby-string">'href'</span>).<span class="ruby-identifier">value</span>[<span class="ruby-value">-6</span>,<span class="ruby-value">6</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;_0.xml&quot;</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-comment"># Copy base data files </span>
+      <span class="ruby-comment"># (if inning data wasn't there, this gets skipped)</span>
+      [<span class="ruby-string">'boxscore.xml'</span>,<span class="ruby-string">'eventLog.xml'</span>,<span class="ruby-string">'players.xml'</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">copyGameDayXML</span>(<span class="ruby-identifier">file</span>,<span class="ruby-identifier">paths</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">bang</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Unable to download some data for #{e.attribute('href').value}&quot;</span>  
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-identifier">game_day_url_for_date</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- pull-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- pull-method -->
+
+    
+      <div id="method-c-pull_days" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">pull_days</span><span
+            class="method-args">(range,args = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Pull Gameday XML files for a range of dates. The args hash passes arguments
+like games_folder location on to <a
+href="Spider.html#method-c-pull">::pull</a>.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-comment"># Pull all games in MLB in July 2011</span>
+<span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Gameday</span><span class="ruby-operator">::</span><span class="ruby-constant">Spider</span>.<span class="ruby-identifier">pull_days</span>(<span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2011</span>,<span class="ruby-value">7</span>,<span class="ruby-value">1</span>)<span class="ruby-operator">..</span><span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2011</span>,<span class="ruby-value">7</span>,<span class="ruby-value">31</span>), {:<span class="ruby-identifier">games_location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'/Users/geoff/games'</span>})
+</pre>
+
+<p>Arguments:</p>
+
+<pre>range: (Range)
+args: (Hash)</pre>
+          
+
+          
+          <div class="method-source-code" id="pull_days-source">
+            <pre><span class="ruby-comment"># File lib/greenmonster.rb, line 93</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">pull_days</span>(<span class="ruby-identifier">range</span>,<span class="ruby-identifier">args</span> = {})
+  <span class="ruby-identifier">range</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">day</span><span class="ruby-operator">|</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">pull</span>(<span class="ruby-identifier">args</span>.<span class="ruby-identifier">merge</span>({<span class="ruby-value">:date</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">day</span>}))}
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- pull_days-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- pull_days-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+
