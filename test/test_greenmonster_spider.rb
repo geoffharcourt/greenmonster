@@ -1,0 +1,85 @@
+require 'minitest/autorun'
+require 'greenmonster'
+
+class GreenmonsterSpiderTest < MiniTest::Unit::TestCase
+  def setup
+    @local_test_data_location = "./greenmonster_test_games"
+    FileUtils.mkdir_p @local_test_data_location
+  end
+  
+  def test_format_date_as_folder
+    assert_equal "year_2011/month_07/day_04", Greenmonster::Spider.format_date_as_folder(Date.new(2011,7,4))
+    assert_equal "year_2012/month_12/day_31", Greenmonster::Spider.format_date_as_folder(Date.new(2012,12,31))
+  end
+  
+  def test_copy_gameday_xml
+    paths = {
+      :localGameFolder => "#{@local_test_data_location}/mlb/year_2011/month_05/day_03/gid_2011_05_03_sfnmlb_nynmlb_1/",
+      :mlbGameFolder => "http://gd2.mlb.com/components/game/mlb/year_2011/month_05/day_03/gid_2011_05_03_sfnmlb_nynmlb_1/"
+    }
+    FileUtils.mkdir_p paths[:localGameFolder] + 'inning'
+    
+    %w(linescore.xml inning_all.xml).each do |f|
+      Greenmonster::Spider.copy_gameday_xml(f,paths)
+    end
+    
+    assert_equal 287337, Nokogiri::XML(open(paths[:localGameFolder] + 'linescore.xml')).search("game").first.attribute('game_pk').value.to_i
+    assert_equal 10, Nokogiri::XML(open(paths[:localGameFolder] + 'inning/inning_all.xml')).search("inning").count
+    assert_equal 400023, Nokogiri::XML(open(paths[:localGameFolder] + 'inning/inning_all.xml')).search("atbat").first.attribute('batter').value.to_i
+  end
+  
+  def test_pull_day
+    Greenmonster::Spider.pull_day({:print_games => false, :games_folder => @local_test_data_location, :date => Date.new(2011,6,7)})
+    
+    assert_equal 17, Dir.entries(@local_test_data_location + '/mlb/year_2011/month_06/day_07/').count
+    
+    game_location = @local_test_data_location + '/mlb/year_2011/month_06/day_07/gid_2011_06_07_bosmlb_nyamlb_1'
+    %w(linescore.xml boxscore.xml players.xml eventLog.xml inning).each do |f|
+      assert Dir.entries(game_location).include? f
+    end
+    
+    boxscore = Nokogiri::XML(open(game_location + '/boxscore.xml'))
+    eventlog = Nokogiri::XML(open(game_location + '/eventLog.xml'))
+    players = Nokogiri::XML(open(game_location + '/players.xml'))
+    innings = Nokogiri::XML(open(game_location + '/inning/inning_all.xml'))
+    
+    assert_equal 8, boxscore.search('pitcher').count
+    assert_equal 147, boxscore.search('boxscore').first.attribute('home_id').value.to_i
+    assert eventlog.search("event[number='19']").attribute('description').value.include?('Pedroia walks.')
+    assert_equal 'Magadan', players.search("team[type='away']").search("coach[position='batting_coach']").attribute('last').value
+    assert_equal 'Strikeout', innings.search('atbat').last.attribute('event').value
+  end
+  
+  def test_pull_minor_league_games
+    Greenmonster::Spider.pull_day({:league => 'aaa', :print_games => false, :games_folder => @local_test_data_location, :date => Date.new(2011,9,1)})
+    
+    assert_equal 13, Dir.entries(@local_test_data_location + '/aaa/year_2011/month_09/day_01/').count
+    %w(linescore.xml boxscore.xml players.xml eventLog.xml inning).each do |f|
+      assert Dir.entries(@local_test_data_location + '/aaa/year_2011/month_09/day_01/gid_2011_09_01_albaaa_mrbaaa_1/').include? f
+    end
+  end
+  
+  def test_pull_games_prior_to_2008
+    Greenmonster::Spider.pull_day({:print_games => false, :games_folder => @local_test_data_location, :date => Date.new(2007,4,15)})
+    
+    assert_equal 12, Dir.entries(@local_test_data_location + '/mlb/year_2007/month_04/day_15/gid_2007_04_15_detmlb_tormlb_1/inning/').count
+  end
+  
+  def test_pull_days
+    Greenmonster::Spider.pull_days((Date.new(2011,8,4)..Date.new(2011,8,5)), {:print_games => false, :games_folder => @local_test_data_location})
+    
+    assert_equal 4, Dir.entries(@local_test_data_location + '/mlb/year_2011/month_08/').count
+    assert_equal 17, Dir.entries(@local_test_data_location + '/mlb/year_2011/month_08/day_05').count
+  end
+  
+  def test_pull_day_with_default_folder_location
+    Greenmonster.set_games_folder(@local_test_data_location)
+    Greenmonster::Spider.pull_day({:date => Date.new(2011,7,4), :print_games => false})
+    
+    assert_equal 288186, Nokogiri::XML(open(@local_test_data_location + '/mlb/year_2011/month_07/day_04/gid_2011_07_04_tormlb_bosmlb_1/boxscore.xml')).search('boxscore').first.attribute('game_pk').value.to_i
+  end
+  
+  def teardown
+    FileUtils.remove_dir @local_test_data_location
+  end
+end

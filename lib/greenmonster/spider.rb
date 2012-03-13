@@ -16,12 +16,14 @@ class Greenmonster::Spider
   #
   # Arguments:
   #   args: (Hash)
+  #
     
   def self.pull_day(args = {})
     args = {
       :date => Date.today,
       :league => 'mlb',
-      :print_games => true
+      :print_games => true,
+      :games_folder => Greenmonster.games_folder
     }.merge(args)
       
     raise "Games folder location required." if args[:games_folder].nil?
@@ -113,7 +115,7 @@ class Greenmonster::Spider
     # Output a folder format similar to the one used by Gameday.
     # 
     # Example:
-    #   Spider.format_date_as_folder(Date.new(2011,7,4))
+    #   >> Spider.format_date_as_folder(Date.new(2011,7,4))
     #   => "year_2011/month_07/day_04"
     # 
     # Arguments:
