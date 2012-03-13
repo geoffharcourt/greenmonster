@@ -13,7 +13,7 @@ If you don't want to specify a download location every time you run the spider, 
 	# Set games folder location
 	>> Greenmonster.set_games_folder('/Users/geoff/games/')
 
-The spider utility has three public class methods: Spider.pull_game, Spider.pull_day and Spider.pull_days. 
+The spider utility has three public class methods: Spider.pull_game, Spider.pull_day, and Spider.pull_days. 
 
 Spider.pull_game takes a game_id (the folder name of the game on the Gameday server) and a hash of options as arguments. If for some reason the game does not fall in the expected folder for the game's date or sport code, you can add those options to the arguments hash. Other options include :games_folder and :print_games (if false, game IDs are not printed to screen).
 
