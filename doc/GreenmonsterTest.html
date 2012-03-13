@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>module Greenmonster - RDoc Documentation</title>
+<title>class GreenmonsterTest - RDoc Documentation</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -20,7 +20,7 @@
 <script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
 
 
-<body id="top" class="module">
+<body id="top" class="class">
 <nav id="metadata">
   <nav id="home-section" class="section">
   <h3 class="section-header">
@@ -47,7 +47,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>lib/greenmonster.rb
+    <li>test/test_greenmonster.rb
   </ul>
 </nav>
 
@@ -56,7 +56,13 @@
 
   <div id="class-metadata">
     
-    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">MiniTest::Unit::TestCase
+  
+</nav>
+
     
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
@@ -64,9 +70,11 @@
 
   <ul class="link-list">
     
-    <li><a href="#method-c-games_folder">::games_folder</a>
+    <li><a href="#method-i-setup">#setup</a>
     
-    <li><a href="#method-c-set_games_folder">::set_games_folder</a>
+    <li><a href="#method-i-teardown">#teardown</a>
+    
+    <li><a href="#method-i-test_set_games_folder_location">#test_set_games_folder_location</a>
     
   </ul>
 </nav>
@@ -104,7 +112,7 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="module">module Greenmonster</h1>
+  <h1 class="class">class GreenmonsterTest</h1>
 
   <div id="description" class="description">
     
@@ -124,14 +132,14 @@
 
     <!-- Methods -->
     
-     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Public Class Methods</h3>
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
 
     
-      <div id="method-c-games_folder" class="method-detail ">
+      <div id="method-i-setup" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">games_folder</span><span
+          <span class="method-name">setup</span><span
             class="method-args">()</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
@@ -139,73 +147,85 @@
 
         <div class="method-description">
           
-          <p>Return the default games folder location</p>
-
-<p>Example:</p>
-
-<pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Greenmonster</span>.<span class="ruby-identifier">set_games_folder</span>(<span class="ruby-string">&quot;/Users/geoff/game_data&quot;</span>)
-<span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Greenmonster</span>.<span class="ruby-identifier">games_folder</span>
-=<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;/Users/geoff/game_data&quot;</span>
-</pre>
+          
           
 
           
-          <div class="method-source-code" id="games_folder-source">
-            <pre><span class="ruby-comment"># File lib/greenmonster.rb, line 32</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">games_folder</span>
-  <span class="ruby-identifier">@@games_folder</span>
+          <div class="method-source-code" id="setup-source">
+            <pre><span class="ruby-comment"># File test/test_greenmonster.rb, line 5</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">setup</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- games_folder-source -->
+          </div><!-- setup-source -->
           
         </div>
 
         
 
         
-      </div><!-- games_folder-method -->
+      </div><!-- setup-method -->
 
     
-      <div id="method-c-set_games_folder" class="method-detail ">
+      <div id="method-i-teardown" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">set_games_folder</span><span
-            class="method-args">(location)</span>
+          <span class="method-name">teardown</span><span
+            class="method-args">()</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
         
 
         <div class="method-description">
           
-          <p>Set the default folder to which games are saved after being downloaded from
-the server.</p>
-
-<p>Example:</p>
-
-<pre class="ruby">=<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Greenmonster</span>.<span class="ruby-identifier">set_games_folder</span>(<span class="ruby-string">&quot;/Users/geoff/game_data&quot;</span>)
-</pre>
-
-<p>Arguments:</p>
-
-<pre>location: (String)</pre>
+          
           
 
           
-          <div class="method-source-code" id="set_games_folder-source">
-            <pre><span class="ruby-comment"># File lib/greenmonster.rb, line 20</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">set_games_folder</span>(<span class="ruby-identifier">location</span>)
-  <span class="ruby-identifier">@@games_folder</span> = <span class="ruby-identifier">location</span>
+          <div class="method-source-code" id="teardown-source">
+            <pre><span class="ruby-comment"># File test/test_greenmonster.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">teardown</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- set_games_folder-source -->
+          </div><!-- teardown-source -->
           
         </div>
 
         
 
         
-      </div><!-- set_games_folder-method -->
+      </div><!-- teardown-method -->
 
     
-    </section><!-- public-class-method-details -->
+      <div id="method-i-test_set_games_folder_location" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_set_games_folder_location</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_set_games_folder_location-source">
+            <pre><span class="ruby-comment"># File test/test_greenmonster.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_set_games_folder_location</span>
+  <span class="ruby-constant">Greenmonster</span>.<span class="ruby-identifier">set_games_folder</span>(<span class="ruby-string">'./test_greenmonster_folder'</span>)
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-string">'./test_greenmonster_folder'</span>, <span class="ruby-constant">Greenmonster</span>.<span class="ruby-identifier">games_folder</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- test_set_games_folder_location-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- test_set_games_folder_location-method -->
+
+    
+    </section><!-- public-instance-method-details -->
   
   </section><!-- 5Buntitled-5D -->
 

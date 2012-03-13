@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>class GreenmonsterSpiderTest - RDoc Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="class">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>test/test_greenmonster_spider.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    <nav id="parent-class-section" class="section">
+  <h3 class="section-header">Parent</h3>
+  
+  <p class="link">MiniTest::Unit::TestCase
+  
+</nav>
+
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-setup">#setup</a>
+    
+    <li><a href="#method-i-teardown">#teardown</a>
+    
+    <li><a href="#method-i-test_copy_gameday_xml">#test_copy_gameday_xml</a>
+    
+    <li><a href="#method-i-test_format_date_as_folder">#test_format_date_as_folder</a>
+    
+    <li><a href="#method-i-test_pull_day">#test_pull_day</a>
+    
+    <li><a href="#method-i-test_pull_day_with_default_folder_location">#test_pull_day_with_default_folder_location</a>
+    
+    <li><a href="#method-i-test_pull_days">#test_pull_days</a>
+    
+    <li><a href="#method-i-test_pull_games_prior_to_2008">#test_pull_games_prior_to_2008</a>
+    
+    <li><a href="#method-i-test_pull_non_mlb_sport_code_games">#test_pull_non_mlb_sport_code_games</a>
+    
+    <li><a href="#method-i-test_pull_single_game_by_game_id">#test_pull_single_game_by_game_id</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./Rakefile.html">Rakefile</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Greenmonster.html">Greenmonster</a>
+  
+    <li><a href="./Greenmonster/Spider.html">Greenmonster::Spider</a>
+  
+    <li><a href="./GreenmonsterSpiderTest.html">GreenmonsterSpiderTest</a>
+  
+    <li><a href="./GreenmonsterTest.html">GreenmonsterTest</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="class">class GreenmonsterSpiderTest</h1>
+
+  <div id="description" class="description">
+    
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-setup" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">setup</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="setup-source">
+            <pre><span class="ruby-comment"># File test/test_greenmonster_spider.rb, line 5</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">setup</span>
+  <span class="ruby-ivar">@local_test_data_location</span> = <span class="ruby-string">&quot;./greenmonster_test_games&quot;</span>
+  <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-ivar">@local_test_data_location</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- setup-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- setup-method -->
+
+    
+      <div id="method-i-teardown" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">teardown</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="teardown-source">
+            <pre><span class="ruby-comment"># File test/test_greenmonster_spider.rb, line 86</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">teardown</span>
+  <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">remove_dir</span> <span class="ruby-ivar">@local_test_data_location</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- teardown-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- teardown-method -->
+
+    
+      <div id="method-i-test_copy_gameday_xml" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_copy_gameday_xml</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_copy_gameday_xml-source">
+            <pre><span class="ruby-comment"># File test/test_greenmonster_spider.rb, line 15</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_copy_gameday_xml</span>
+  <span class="ruby-identifier">paths</span> = {
+    <span class="ruby-value">:localGameFolder</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;#{@local_test_data_location}/mlb/year_2011/month_05/day_03/gid_2011_05_03_sfnmlb_nynmlb_1/&quot;</span>,
+    <span class="ruby-value">:mlbGameFolder</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;http://gd2.mlb.com/components/game/mlb/year_2011/month_05/day_03/gid_2011_05_03_sfnmlb_nynmlb_1/&quot;</span>
+  }
+  <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-identifier">paths</span>[<span class="ruby-value">:localGameFolder</span>] <span class="ruby-operator">+</span> <span class="ruby-string">'inning'</span>
+  
+  <span class="ruby-node">%w(linescore.xml inning_all.xml)</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">Greenmonster</span><span class="ruby-operator">::</span><span class="ruby-constant">Spider</span>.<span class="ruby-identifier">copy_gameday_xml</span>(<span class="ruby-identifier">f</span>,<span class="ruby-identifier">paths</span>)
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">287337</span>, <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span>(<span class="ruby-identifier">open</span>(<span class="ruby-identifier">paths</span>[<span class="ruby-value">:localGameFolder</span>] <span class="ruby-operator">+</span> <span class="ruby-string">'linescore.xml'</span>)).<span class="ruby-identifier">search</span>(<span class="ruby-string">&quot;game&quot;</span>).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">attribute</span>(<span class="ruby-string">'game_pk'</span>).<span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_i</span>
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">10</span>, <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span>(<span class="ruby-identifier">open</span>(<span class="ruby-identifier">paths</span>[<span class="ruby-value">:localGameFolder</span>] <span class="ruby-operator">+</span> <span class="ruby-string">'inning/inning_all.xml'</span>)).<span class="ruby-identifier">search</span>(<span class="ruby-string">&quot;inning&quot;</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">400023</span>, <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span>(<span class="ruby-identifier">open</span>(<span class="ruby-identifier">paths</span>[<span class="ruby-value">:localGameFolder</span>] <span class="ruby-operator">+</span> <span class="ruby-string">'inning/inning_all.xml'</span>)).<span class="ruby-identifier">search</span>(<span class="ruby-string">&quot;atbat&quot;</span>).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">attribute</span>(<span class="ruby-string">'batter'</span>).<span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_i</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- test_copy_gameday_xml-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- test_copy_gameday_xml-method -->
+
+    
+      <div id="method-i-test_format_date_as_folder" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_format_date_as_folder</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_format_date_as_folder-source">
+            <pre><span class="ruby-comment"># File test/test_greenmonster_spider.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_format_date_as_folder</span>
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-string">&quot;year_2011/month_07/day_04&quot;</span>, <span class="ruby-constant">Greenmonster</span><span class="ruby-operator">::</span><span class="ruby-constant">Spider</span>.<span class="ruby-identifier">format_date_as_folder</span>(<span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2011</span>,<span class="ruby-value">7</span>,<span class="ruby-value">4</span>))
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-string">&quot;year_2012/month_12/day_31&quot;</span>, <span class="ruby-constant">Greenmonster</span><span class="ruby-operator">::</span><span class="ruby-constant">Spider</span>.<span class="ruby-identifier">format_date_as_folder</span>(<span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2012</span>,<span class="ruby-value">12</span>,<span class="ruby-value">31</span>))
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- test_format_date_as_folder-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- test_format_date_as_folder-method -->
+
+    
+      <div id="method-i-test_pull_day" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_pull_day</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_pull_day-source">
+            <pre><span class="ruby-comment"># File test/test_greenmonster_spider.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_pull_day</span>
+  <span class="ruby-constant">Greenmonster</span><span class="ruby-operator">::</span><span class="ruby-constant">Spider</span>.<span class="ruby-identifier">pull_day</span>({<span class="ruby-value">:print_games</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">:games_folder</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@local_test_data_location</span>, <span class="ruby-value">:date</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2011</span>,<span class="ruby-value">6</span>,<span class="ruby-value">7</span>)})
+  
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">17</span>, <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">entries</span>(<span class="ruby-ivar">@local_test_data_location</span> <span class="ruby-operator">+</span> <span class="ruby-string">'/mlb/year_2011/month_06/day_07/'</span>).<span class="ruby-identifier">count</span>
+  
+  <span class="ruby-identifier">game_location</span> = <span class="ruby-ivar">@local_test_data_location</span> <span class="ruby-operator">+</span> <span class="ruby-string">'/mlb/year_2011/month_06/day_07/gid_2011_06_07_bosmlb_nyamlb_1'</span>
+  <span class="ruby-node">%w(linescore.xml boxscore.xml players.xml eventLog.xml inning)</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">assert</span> <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">entries</span>(<span class="ruby-identifier">game_location</span>).<span class="ruby-identifier">include?</span> <span class="ruby-identifier">f</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-identifier">boxscore</span> = <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span>(<span class="ruby-identifier">open</span>(<span class="ruby-identifier">game_location</span> <span class="ruby-operator">+</span> <span class="ruby-string">'/boxscore.xml'</span>))
+  <span class="ruby-identifier">eventlog</span> = <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span>(<span class="ruby-identifier">open</span>(<span class="ruby-identifier">game_location</span> <span class="ruby-operator">+</span> <span class="ruby-string">'/eventLog.xml'</span>))
+  <span class="ruby-identifier">players</span> = <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span>(<span class="ruby-identifier">open</span>(<span class="ruby-identifier">game_location</span> <span class="ruby-operator">+</span> <span class="ruby-string">'/players.xml'</span>))
+  <span class="ruby-identifier">innings</span> = <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span>(<span class="ruby-identifier">open</span>(<span class="ruby-identifier">game_location</span> <span class="ruby-operator">+</span> <span class="ruby-string">'/inning/inning_all.xml'</span>))
+  
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">8</span>, <span class="ruby-identifier">boxscore</span>.<span class="ruby-identifier">search</span>(<span class="ruby-string">'pitcher'</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">147</span>, <span class="ruby-identifier">boxscore</span>.<span class="ruby-identifier">search</span>(<span class="ruby-string">'boxscore'</span>).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">attribute</span>(<span class="ruby-string">'home_id'</span>).<span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_i</span>
+  <span class="ruby-identifier">assert</span> <span class="ruby-identifier">eventlog</span>.<span class="ruby-identifier">search</span>(<span class="ruby-string">&quot;event[number='19']&quot;</span>).<span class="ruby-identifier">attribute</span>(<span class="ruby-string">'description'</span>).<span class="ruby-identifier">value</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">'Pedroia walks.'</span>)
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-string">'Magadan'</span>, <span class="ruby-identifier">players</span>.<span class="ruby-identifier">search</span>(<span class="ruby-string">&quot;team[type='away']&quot;</span>).<span class="ruby-identifier">search</span>(<span class="ruby-string">&quot;coach[position='batting_coach']&quot;</span>).<span class="ruby-identifier">attribute</span>(<span class="ruby-string">'last'</span>).<span class="ruby-identifier">value</span>
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-string">'Strikeout'</span>, <span class="ruby-identifier">innings</span>.<span class="ruby-identifier">search</span>(<span class="ruby-string">'atbat'</span>).<span class="ruby-identifier">last</span>.<span class="ruby-identifier">attribute</span>(<span class="ruby-string">'event'</span>).<span class="ruby-identifier">value</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- test_pull_day-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- test_pull_day-method -->
+
+    
+      <div id="method-i-test_pull_day_with_default_folder_location" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_pull_day_with_default_folder_location</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_pull_day_with_default_folder_location-source">
+            <pre><span class="ruby-comment"># File test/test_greenmonster_spider.rb, line 75</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_pull_day_with_default_folder_location</span>
+  <span class="ruby-constant">Greenmonster</span>.<span class="ruby-identifier">set_games_folder</span>(<span class="ruby-ivar">@local_test_data_location</span>)
+  <span class="ruby-constant">Greenmonster</span><span class="ruby-operator">::</span><span class="ruby-constant">Spider</span>.<span class="ruby-identifier">pull_day</span>({<span class="ruby-value">:date</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2011</span>,<span class="ruby-value">7</span>,<span class="ruby-value">4</span>), <span class="ruby-value">:print_games</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>})
+  
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">288186</span>, <span class="ruby-constant">Nokogiri</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span>(<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@local_test_data_location</span> <span class="ruby-operator">+</span> <span class="ruby-string">'/mlb/year_2011/month_07/day_04/gid_2011_07_04_tormlb_bosmlb_1/boxscore.xml'</span>)).<span class="ruby-identifier">search</span>(<span class="ruby-string">'boxscore'</span>).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">attribute</span>(<span class="ruby-string">'game_pk'</span>).<span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_i</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- test_pull_day_with_default_folder_location-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- test_pull_day_with_default_folder_location-method -->
+
+    
+      <div id="method-i-test_pull_days" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_pull_days</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_pull_days-source">
+            <pre><span class="ruby-comment"># File test/test_greenmonster_spider.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_pull_days</span>
+  <span class="ruby-constant">Greenmonster</span><span class="ruby-operator">::</span><span class="ruby-constant">Spider</span>.<span class="ruby-identifier">pull_days</span>((<span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2011</span>,<span class="ruby-value">8</span>,<span class="ruby-value">4</span>)<span class="ruby-operator">..</span><span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2011</span>,<span class="ruby-value">8</span>,<span class="ruby-value">5</span>)), {<span class="ruby-value">:print_games</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">:games_folder</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@local_test_data_location</span>})
+  
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">4</span>, <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">entries</span>(<span class="ruby-ivar">@local_test_data_location</span> <span class="ruby-operator">+</span> <span class="ruby-string">'/mlb/year_2011/month_08/'</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">17</span>, <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">entries</span>(<span class="ruby-ivar">@local_test_data_location</span> <span class="ruby-operator">+</span> <span class="ruby-string">'/mlb/year_2011/month_08/day_05'</span>).<span class="ruby-identifier">count</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- test_pull_days-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- test_pull_days-method -->
+
+    
+      <div id="method-i-test_pull_games_prior_to_2008" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_pull_games_prior_to_2008</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_pull_games_prior_to_2008-source">
+            <pre><span class="ruby-comment"># File test/test_greenmonster_spider.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_pull_games_prior_to_2008</span>
+  <span class="ruby-constant">Greenmonster</span><span class="ruby-operator">::</span><span class="ruby-constant">Spider</span>.<span class="ruby-identifier">pull_day</span>({<span class="ruby-value">:print_games</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">:games_folder</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@local_test_data_location</span>, <span class="ruby-value">:date</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2007</span>,<span class="ruby-value">4</span>,<span class="ruby-value">15</span>)})
+  
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">12</span>, <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">entries</span>(<span class="ruby-ivar">@local_test_data_location</span> <span class="ruby-operator">+</span> <span class="ruby-string">'/mlb/year_2007/month_04/day_15/gid_2007_04_15_detmlb_tormlb_1/inning/'</span>).<span class="ruby-identifier">count</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- test_pull_games_prior_to_2008-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- test_pull_games_prior_to_2008-method -->
+
+    
+      <div id="method-i-test_pull_non_mlb_sport_code_games" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_pull_non_mlb_sport_code_games</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_pull_non_mlb_sport_code_games-source">
+            <pre><span class="ruby-comment"># File test/test_greenmonster_spider.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_pull_non_mlb_sport_code_games</span>
+  <span class="ruby-constant">Greenmonster</span><span class="ruby-operator">::</span><span class="ruby-constant">Spider</span>.<span class="ruby-identifier">pull_day</span>({<span class="ruby-value">:sport_code</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">'aaa'</span>, <span class="ruby-value">:print_games</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">:games_folder</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@local_test_data_location</span>, <span class="ruby-value">:date</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2011</span>,<span class="ruby-value">9</span>,<span class="ruby-value">1</span>)})
+  
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">13</span>, <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">entries</span>(<span class="ruby-ivar">@local_test_data_location</span> <span class="ruby-operator">+</span> <span class="ruby-string">'/aaa/year_2011/month_09/day_01/'</span>).<span class="ruby-identifier">count</span>
+  <span class="ruby-node">%w(linescore.xml boxscore.xml players.xml eventLog.xml inning)</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">assert</span> <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">entries</span>(<span class="ruby-ivar">@local_test_data_location</span> <span class="ruby-operator">+</span> <span class="ruby-string">'/aaa/year_2011/month_09/day_01/gid_2011_09_01_albaaa_mrbaaa_1/'</span>).<span class="ruby-identifier">include?</span> <span class="ruby-identifier">f</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- test_pull_non_mlb_sport_code_games-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- test_pull_non_mlb_sport_code_games-method -->
+
+    
+      <div id="method-i-test_pull_single_game_by_game_id" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_pull_single_game_by_game_id</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_pull_single_game_by_game_id-source">
+            <pre><span class="ruby-comment"># File test/test_greenmonster_spider.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_pull_single_game_by_game_id</span>
+  <span class="ruby-constant">Greenmonster</span><span class="ruby-operator">::</span><span class="ruby-constant">Spider</span>.<span class="ruby-identifier">pull_game</span>(<span class="ruby-string">'gid_2011_07_04_tormlb_bos_mlb_1'</span>, {<span class="ruby-value">:games_folder</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@local_test_data_location</span>, <span class="ruby-value">:print_games</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>})
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- test_pull_single_game_by_game_id-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- test_pull_single_game_by_game_id-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+
