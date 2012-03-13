@@ -1,10 +1,9 @@
 Greenmonster
 ============
 
-Greenmonster is a toolkit for baseball stat enthusiasts or sabermetricians to build a database of 
-play-by-play stats from MLB's [Gameday XML data](http://gd.mlb.com/components/game/).
+Greenmonster is a toolkit for baseball stat enthusiasts or sabermetricians to build a database of play-by-play stats from MLB's [Gameday XML data](http://gd.mlb.com/components/game/).
 
-The initial gem is currently spiders games from MLB's servers. I will be extracting pieces out of my toolkit to parse Gameday XML data to produce play-by-play database of MLB and MiLB stats.
+The gem currently spiders games from MLB's servers. Over the season, I will be extracting pieces out of my toolkit to parse Gameday XML data to produce play-by-play database of MLB and MiLB stats.
 
 Usage 
 -----
@@ -21,8 +20,7 @@ Spider.pull_game takes a game_id (the folder name of the game on the Gameday ser
     # Pulls MLB's 7/4/2011 Toronto @ Boston game
 	>> Greenmonster::Spider.pull_game('gid_2011_07_04_tormlb_bosmlb_1', {:print_games => false})
 
-Spider.pull_day takes an hash of options as an argument. Greenmonster will create subfolders by MLB "sport_code" (MLB games fall under 'mlb', various 
-minor league games and non-MLB/MiLB games fall under other sport code designations), and then children folders for years, months, days, and specific games.
+Spider.pull_day takes an hash of options as an argument. Greenmonster will create subfolders by MLB "sport_code" (MLB games fall under 'mlb', various minor league games and non-MLB/MiLB games fall under other sport code designations), and then children folders for years, months, days, and specific games.
 
     # Pulls all MLB games for today
     >> Greenmonster::Spider.pull_day({:date => Date.today, :games_folder => './home/geoff/games'})
@@ -31,8 +29,7 @@ minor league games and non-MLB/MiLB games fall under other sport code designatio
     >> Greenmonster::Spider.pull_day({:sport_code => 'rok', :date => Date.today, :games_folder => './home/geoff/games'})
 
 
-Spider.pull_days takes a range of dates to process as an argument, plus a hash of arguments to pass
-to Spider.pull.
+Spider.pull_days takes a range of dates to process as an argument, plus a hash of arguments to pass to Spider.pull.
 
     # Pulls all MLB games for in April, 2012
 	>> Greenmonster::Spider.pull_days((Date.new(2012,4,1)..Date.new(2012,4,30)), {:games_folder => './home/geoff/games'})
