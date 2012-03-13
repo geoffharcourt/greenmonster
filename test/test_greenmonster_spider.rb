@@ -50,8 +50,8 @@ class GreenmonsterSpiderTest < MiniTest::Unit::TestCase
     assert_equal 'Strikeout', innings.search('atbat').last.attribute('event').value
   end
   
-  def test_pull_minor_league_games
-    Greenmonster::Spider.pull_day({:league => 'aaa', :print_games => false, :games_folder => @local_test_data_location, :date => Date.new(2011,9,1)})
+  def test_pull_non_mlb_sport_code_games
+    Greenmonster::Spider.pull_day({:sport_code => 'aaa', :print_games => false, :games_folder => @local_test_data_location, :date => Date.new(2011,9,1)})
     
     assert_equal 13, Dir.entries(@local_test_data_location + '/aaa/year_2011/month_09/day_01/').count
     %w(linescore.xml boxscore.xml players.xml eventLog.xml inning).each do |f|
@@ -77,6 +77,10 @@ class GreenmonsterSpiderTest < MiniTest::Unit::TestCase
     Greenmonster::Spider.pull_day({:date => Date.new(2011,7,4), :print_games => false})
     
     assert_equal 288186, Nokogiri::XML(open(@local_test_data_location + '/mlb/year_2011/month_07/day_04/gid_2011_07_04_tormlb_bosmlb_1/boxscore.xml')).search('boxscore').first.attribute('game_pk').value.to_i
+  end
+  
+  def test_pull_single_game_by_game_id
+    Greenmonster::Spider.pull_game('gid_2011_07_04_tormlb_bos_mlb_1', {:games_folder => @local_test_data_location, :print_games => false})
   end
   
   def teardown
