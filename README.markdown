@@ -28,6 +28,8 @@ Spider.pull_day takes an hash of options as an argument. Greenmonster will creat
     # Pulls all rookie league games for today
     >> Greenmonster::Spider.pull_day({:sport_code => 'rok', :date => Date.today, :games_folder => './home/geoff/games'})
 
+	# Pulls all games in all sport codes for today
+	>> Greenmonster::Spider.pull_day({:all_sport_codes => true, :date => Date.today, :games_folder => './home/geoff/games'})
 
 Spider.pull_days takes a range of dates to process as an argument, plus a hash of arguments to pass to Spider.pull.
 
