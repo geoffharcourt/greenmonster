@@ -1,3 +1,4 @@
 Gemfile*
 *.gem
 greenmonster_test_games
+test/temp_test.rb

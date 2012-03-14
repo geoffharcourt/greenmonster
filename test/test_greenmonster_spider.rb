@@ -60,7 +60,7 @@ class GreenmonsterSpiderTest < MiniTest::Unit::TestCase
   end
   
   def test_pull_games_prior_to_2008
-    Greenmonster::Spider.pull_day({:print_games => false, :games_folder => @local_test_data_location, :date => Date.new(2007,4,15)})
+    Greenmonster::Spider.pull_game('gid_2007_04_15_detmlb_tormlb_1', {:games_folder => @local_test_data_location, :print_games => false})
     
     assert_equal 12, Dir.entries(@local_test_data_location + '/mlb/year_2007/month_04/day_15/gid_2007_04_15_detmlb_tormlb_1/inning/').count
   end
@@ -86,7 +86,19 @@ class GreenmonsterSpiderTest < MiniTest::Unit::TestCase
   end
   
   def test_pull_single_game_by_game_id
-    Greenmonster::Spider.pull_game('gid_2011_07_04_tormlb_bos_mlb_1', {:games_folder => @local_test_data_location, :print_games => false})
+    Greenmonster::Spider.pull_game('gid_2011_07_04_tormlb_bosmlb_1', {:games_folder => @local_test_data_location, :print_games => false})
+  end
+  
+  def test_no_exception_raised_if_game_data_not_available
+    assert_output(nil,'') do
+      Greenmonster::Spider.pull_game('gid_2011_07_04_zzzmlb_yyymlb_1', {:games_folder => @local_test_data_location, :print_games => false})
+    end
+  end
+  
+  def test_local_file_not_created_if_remote_file_does_not_exist
+    Greenmonster::Spider.pull_game('gid_2011_07_01_xxxmlb_yyymlb_1', {:games_folder => @local_test_data_location, :print_games => false})
+    
+    assert_equal 3, Dir.entries(@local_test_data_location + '/mlb/year_2011/month_07/day_01/gid_2011_07_01_xxxmlb_yyymlb_1').count
   end
   
   def teardown

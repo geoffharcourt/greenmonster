@@ -55,7 +55,7 @@ class Greenmonster::Spider
         copy_gameday_xml(file,paths)
       end
     rescue StandardError => bang
-      puts "Unable to download some data for #{e.attribute('href').value}"  
+      puts "Unable to download some data for #{game_id}"  
     end
     
     return game_id
@@ -149,8 +149,11 @@ class Greenmonster::Spider
     #   paths: (Hash)
   
     def self.copy_gameday_xml (file_name,paths)
-      open(paths[:localGameFolder] + "#{file_name =~ /inning/ ? 'inning/' : ''}" + file_name, 'w') do |file|
-        file.write(self.get(paths[:mlbGameFolder] + "#{file_name =~ /inning/ ? 'inning/' : ''}" + file_name).body)
+      download = self.get(paths[:mlbGameFolder] + "#{file_name =~ /inning/ ? 'inning/' : ''}" + file_name).body
+      unless download.include?('404 Not Found')
+        open(paths[:localGameFolder] + "#{file_name =~ /inning/ ? 'inning/' : ''}" + file_name, 'w') do |file|
+          file.write(download) 
+        end
       end
     end
   
