@@ -65,6 +65,12 @@ class GreenmonsterSpiderTest < MiniTest::Unit::TestCase
     assert_equal 12, Dir.entries(@local_test_data_location + '/mlb/year_2007/month_04/day_15/gid_2007_04_15_detmlb_tormlb_1/inning/').count
   end
   
+  def test_pull_all_sport_codes_for_day
+    Greenmonster::Spider.pull_day({:all_sport_codes => true, :print_games => false, :games_folder => @local_test_data_location, :date => Date.new(2011,7,1)})
+  
+    assert_equal 9, Dir.entries(@local_test_data_location).count
+  end
+  
   def test_pull_days
     Greenmonster::Spider.pull_days((Date.new(2011,8,4)..Date.new(2011,8,5)), {:print_games => false, :games_folder => @local_test_data_location})
     

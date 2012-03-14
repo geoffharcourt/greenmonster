@@ -80,17 +80,27 @@ class Greenmonster::Spider
       :date => Date.today,
       :sport_code => 'mlb',
     }.merge(args)
-      
+    
+    # If we want all sport codes, set up the array.
+    if args[:all_sport_codes]
+      args[:sport_codes] = %w(aaa aax afa afx asx bbc fps hsb ind int jml nae naf nas nat naw oly rok win)
+    else
+      args[:sport_codes] = [args[:sport_code] || 'mlb']
+    end
+    
     # Iterate through every hyperlink on the page.
     # These links represent the individual game folders
     # for each date. Reject any links that aren't to game
     # folders or that are to what look like backup game
     # folders.
-    (Nokogiri::XML(self.get(gameday_league_and_date_url(args)))/"a").reject{|l| l.attribute('href').value[0,4] != "gid_" or l.attribute('href').value[-5,4] == "_bak"}.each do |e|      
-      self.pull_game(e.attribute('href').value.gsub('/',''),args) 
+    args[:sport_codes].each do |sport_code|
+      args[:sport_code] = sport_code
+      (Nokogiri::XML(self.get(gameday_league_and_date_url(args)))/"a").reject{|l| l.attribute('href').value[0,4] != "gid_" or l.attribute('href').value[-5,4] == "_bak"}.each do |e|      
+        self.pull_game(e.attribute('href').value.gsub('/',''),args) 
+      end
     end
-     
-    return gameday_league_and_date_url(args)
+
+    return args[:sport_code]
   end
 
   ##
