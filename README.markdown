@@ -10,32 +10,39 @@ Usage
 
 If you don't want to specify a download location every time you run the spider, you can set a default games folder location using Greenmonster.set_games_location:
 
-	# Set games folder location
-	>> Greenmonster.set_games_folder('/Users/geoff/games/')
+```ruby
+# Set games folder location
+Greenmonster.set_games_folder('/Users/geoff/games/')
+```
 
 The spider utility has three public class methods: Spider.pull_game, Spider.pull_day, and Spider.pull_days. 
 
 Spider.pull_game takes a game_id (the folder name of the game on the Gameday server) and a hash of options as arguments. If for some reason the game does not fall in the expected folder for the game's date or sport code, you can add those options to the arguments hash. Other options include :games_folder and :print_games (if false, game IDs are not printed to screen).
 
-    # Pulls MLB's 7/4/2011 Toronto @ Boston game
-	>> Greenmonster::Spider.pull_game('gid_2011_07_04_tormlb_bosmlb_1', {:print_games => false})
+```ruby
+# Pulls MLB's 7/4/2011 Toronto @ Boston game
+Greenmonster::Spider.pull_game('gid_2011_07_04_tormlb_bosmlb_1', {:print_games => false})
+```
 
 Spider.pull_day takes an hash of options as an argument. Greenmonster will create subfolders by MLB "sport_code" (MLB games fall under 'mlb', various minor league games and non-MLB/MiLB games fall under other sport code designations), and then children folders for years, months, days, and specific games.
 
-    # Pulls all MLB games for today
-    >> Greenmonster::Spider.pull_day({:date => Date.today, :games_folder => './home/geoff/games'})
+```ruby
+# Pulls all MLB games for today
+Greenmonster::Spider.pull_day({:date => Date.today, :games_folder => './home/geoff/games'})
 
-    # Pulls all rookie league games for today
-    >> Greenmonster::Spider.pull_day({:sport_code => 'rok', :date => Date.today, :games_folder => './home/geoff/games'})
+# Pulls all rookie league games for today
+Greenmonster::Spider.pull_day({:sport_code => 'rok', :date => Date.today, :games_folder => './home/geoff/games'})
 
-	# Pulls all games in all sport codes for today
-	>> Greenmonster::Spider.pull_day({:all_sport_codes => true, :date => Date.today, :games_folder => './home/geoff/games'})
+# Pulls all games in all sport codes for today
+Greenmonster::Spider.pull_day({:all_sport_codes => true, :date => Date.today, :games_folder => './home/geoff/games'})
+```
 
 Spider.pull_days takes a range of dates to process as an argument, plus a hash of arguments to pass to Spider.pull.
 
-    # Pulls all MLB games for in April, 2012
-	>> Greenmonster::Spider.pull_days((Date.new(2012,4,1)..Date.new(2012,4,30)), {:games_folder => './home/geoff/games'})
-	
+```ruby
+# Pulls all MLB games for in April, 2012
+Greenmonster::Spider.pull_days((Date.new(2012,4,1)..Date.new(2012,4,30)), {:games_folder => './home/geoff/games'})
+```	
 
 Requirements
 ------------
