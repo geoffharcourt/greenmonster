@@ -1,3 +1,6 @@
+require "rubygems"
+require "bundler/setup"
+
 require 'httparty'
 require 'nokogiri'
 require 'fileutils'

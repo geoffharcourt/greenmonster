@@ -1,4 +1,5 @@
-Gemfile*
 *.gem
-greenmonster_test_games
+.bundle
+Gemfile.lock
+pkg/*
 test/temp_test.rb
