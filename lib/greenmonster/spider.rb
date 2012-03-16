@@ -19,13 +19,14 @@ class Greenmonster::Spider
       :print_games => true,
       :games_folder => Greenmonster.games_folder
     }.merge(args)
+    args[:games_folder] = Pathname.new(args[:games_folder])
     
     puts game_id if args[:print_games]
     
     raise "Games folder location required." if args[:games_folder].nil?
           
     paths = {
-      :localGameFolder => "#{args[:games_folder]}/#{args[:sport_code]}/#{format_date_as_folder(args[:date])}/#{game_id}/",
+      :localGameFolder => args[:games_folder] + args[:sport_code] + format_date_as_folder(args[:date]) + game_id,
       :mlbGameFolder => "#{gameday_league_and_date_url(args)}/#{game_id}/"
     }
         

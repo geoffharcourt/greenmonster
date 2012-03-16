@@ -3,6 +3,7 @@ require "bundler/setup"
 
 require 'httparty'
 require 'nokogiri'
+require 'pathname'
 require 'fileutils'
 
 module Greenmonster
@@ -21,7 +22,7 @@ module Greenmonster
   #
   
   def self.set_games_folder(location)
-    @@games_folder = location
+    @@games_folder = Pathname.new(location)
   end
 
   ##
@@ -30,7 +31,7 @@ module Greenmonster
   # Example:
   #   >> Greenmonster.set_games_folder("/Users/geoff/game_data")
   #   >> Greenmonster.games_folder
-  #   => "/Users/geoff/game_data" 
+  #   => #<Pathname:/Users/geoff/game_data> 
 
   def self.games_folder
     @@games_folder
