@@ -152,7 +152,7 @@ class Greenmonster::Spider
     def self.copy_gameday_xml (file_name,paths)
       download = self.get(paths[:mlbGameFolder] + "#{file_name =~ /inning/ ? 'inning/' : ''}" + file_name).body
       unless download.include?('404 Not Found')
-        open(paths[:localGameFolder] + "#{file_name =~ /inning/ ? 'inning/' : ''}" + file_name, 'w') do |file|
+        open(paths[:localGameFolder] + (file_name =~ /inning/ ? 'inning/' : '') + file_name, 'w') do |file|
           file.write(download) 
         end
       end
