@@ -104,7 +104,7 @@ class GreenmonsterSpiderTest < MiniTest::Unit::TestCase
   def test_sport_code_argument_as_array
     Greenmonster::Spider.pull_day({:date => Date.new(2011,8,1), :sport_code => ['mlb','rok'], :print_games => false, :games_folder => @local_test_data_location})
     
-    assert_equal 4, Dir.entries(@local_test_data_location)
+    assert_equal 4, Dir.entries(@local_test_data_location).count
   end
   
   def teardown
