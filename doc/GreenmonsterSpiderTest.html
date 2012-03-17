@@ -47,6 +47,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
+    <li>test/temp_test.rb
     <li>test/test_greenmonster_spider.rb
   </ul>
 </nav>
@@ -78,6 +79,12 @@
     
     <li><a href="#method-i-test_format_date_as_folder">#test_format_date_as_folder</a>
     
+    <li><a href="#method-i-test_local_file_not_created_if_remote_file_does_not_exist">#test_local_file_not_created_if_remote_file_does_not_exist</a>
+    
+    <li><a href="#method-i-test_no_exception_raised_if_game_data_not_available">#test_no_exception_raised_if_game_data_not_available</a>
+    
+    <li><a href="#method-i-test_pull_all_sport_codes_for_day">#test_pull_all_sport_codes_for_day</a>
+    
     <li><a href="#method-i-test_pull_day">#test_pull_day</a>
     
     <li><a href="#method-i-test_pull_day_with_default_folder_location">#test_pull_day_with_default_folder_location</a>
@@ -100,6 +107,8 @@
   <h3 class="section-header">Pages</h3>
 
   <ul>
+  
+    <li class="file"><a href="./Gemfile.html">Gemfile</a>
   
     <li class="file"><a href="./Rakefile.html">Rakefile</a>
   
@@ -166,7 +175,7 @@
 
           
           <div class="method-source-code" id="setup-source">
-            <pre><span class="ruby-comment"># File test/test_greenmonster_spider.rb, line 5</span>
+            <pre><span class="ruby-comment"># File test/temp_test.rb, line 5</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setup</span>
   <span class="ruby-ivar">@local_test_data_location</span> = <span class="ruby-string">&quot;./greenmonster_test_games&quot;</span>
   <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-ivar">@local_test_data_location</span>
@@ -197,7 +206,7 @@
 
           
           <div class="method-source-code" id="teardown-source">
-            <pre><span class="ruby-comment"># File test/test_greenmonster_spider.rb, line 86</span>
+            <pre><span class="ruby-comment"># File test/temp_test.rb, line 16</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">teardown</span>
   <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">remove_dir</span> <span class="ruby-ivar">@local_test_data_location</span>
 <span class="ruby-keyword">end</span></pre>
@@ -284,6 +293,102 @@
       </div><!-- test_format_date_as_folder-method -->
 
     
+      <div id="method-i-test_local_file_not_created_if_remote_file_does_not_exist" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_local_file_not_created_if_remote_file_does_not_exist</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_local_file_not_created_if_remote_file_does_not_exist-source">
+            <pre><span class="ruby-comment"># File test/temp_test.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_local_file_not_created_if_remote_file_does_not_exist</span>
+  <span class="ruby-constant">Greenmonster</span><span class="ruby-operator">::</span><span class="ruby-constant">Spider</span>.<span class="ruby-identifier">pull_game</span>(<span class="ruby-string">'gid_2011_07_01_xxxmlb_yyymlb_1'</span>, {<span class="ruby-value">:games_folder</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@local_test_data_location</span>, <span class="ruby-value">:print_games</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>})
+  
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">3</span>, <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">entries</span>(<span class="ruby-ivar">@local_test_data_location</span> <span class="ruby-operator">+</span> <span class="ruby-string">'/mlb/year_2011/month_07/day_01/gid_2011_07_01_xxxmlb_yyymlb_1'</span>).<span class="ruby-identifier">count</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- test_local_file_not_created_if_remote_file_does_not_exist-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- test_local_file_not_created_if_remote_file_does_not_exist-method -->
+
+    
+      <div id="method-i-test_no_exception_raised_if_game_data_not_available" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_no_exception_raised_if_game_data_not_available</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_no_exception_raised_if_game_data_not_available-source">
+            <pre><span class="ruby-comment"># File test/test_greenmonster_spider.rb, line 92</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_no_exception_raised_if_game_data_not_available</span>
+  <span class="ruby-identifier">assert_output</span>(<span class="ruby-keyword">nil</span>,<span class="ruby-string">''</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-constant">Greenmonster</span><span class="ruby-operator">::</span><span class="ruby-constant">Spider</span>.<span class="ruby-identifier">pull_game</span>(<span class="ruby-string">'gid_2011_07_04_zzzmlb_yyymlb_1'</span>, {<span class="ruby-value">:games_folder</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@local_test_data_location</span>, <span class="ruby-value">:print_games</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>})
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- test_no_exception_raised_if_game_data_not_available-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- test_no_exception_raised_if_game_data_not_available-method -->
+
+    
+      <div id="method-i-test_pull_all_sport_codes_for_day" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_pull_all_sport_codes_for_day</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_pull_all_sport_codes_for_day-source">
+            <pre><span class="ruby-comment"># File test/test_greenmonster_spider.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_pull_all_sport_codes_for_day</span>
+  <span class="ruby-constant">Greenmonster</span><span class="ruby-operator">::</span><span class="ruby-constant">Spider</span>.<span class="ruby-identifier">pull_day</span>({<span class="ruby-value">:all_sport_codes</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">:print_games</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">:games_folder</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@local_test_data_location</span>, <span class="ruby-value">:date</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2011</span>,<span class="ruby-value">7</span>,<span class="ruby-value">1</span>)})
+
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">9</span>, <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">entries</span>(<span class="ruby-ivar">@local_test_data_location</span>).<span class="ruby-identifier">count</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- test_pull_all_sport_codes_for_day-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- test_pull_all_sport_codes_for_day-method -->
+
+    
       <div id="method-i-test_pull_day" class="method-detail ">
         
         <div class="method-heading">
@@ -348,7 +453,7 @@
 
           
           <div class="method-source-code" id="test_pull_day_with_default_folder_location-source">
-            <pre><span class="ruby-comment"># File test/test_greenmonster_spider.rb, line 75</span>
+            <pre><span class="ruby-comment"># File test/test_greenmonster_spider.rb, line 81</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">test_pull_day_with_default_folder_location</span>
   <span class="ruby-constant">Greenmonster</span>.<span class="ruby-identifier">set_games_folder</span>(<span class="ruby-ivar">@local_test_data_location</span>)
   <span class="ruby-constant">Greenmonster</span><span class="ruby-operator">::</span><span class="ruby-constant">Spider</span>.<span class="ruby-identifier">pull_day</span>({<span class="ruby-value">:date</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2011</span>,<span class="ruby-value">7</span>,<span class="ruby-value">4</span>), <span class="ruby-value">:print_games</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>})
@@ -381,7 +486,7 @@
 
           
           <div class="method-source-code" id="test_pull_days-source">
-            <pre><span class="ruby-comment"># File test/test_greenmonster_spider.rb, line 68</span>
+            <pre><span class="ruby-comment"># File test/test_greenmonster_spider.rb, line 74</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">test_pull_days</span>
   <span class="ruby-constant">Greenmonster</span><span class="ruby-operator">::</span><span class="ruby-constant">Spider</span>.<span class="ruby-identifier">pull_days</span>((<span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2011</span>,<span class="ruby-value">8</span>,<span class="ruby-value">4</span>)<span class="ruby-operator">..</span><span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2011</span>,<span class="ruby-value">8</span>,<span class="ruby-value">5</span>)), {<span class="ruby-value">:print_games</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">:games_folder</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@local_test_data_location</span>})
   
@@ -416,7 +521,7 @@
           <div class="method-source-code" id="test_pull_games_prior_to_2008-source">
             <pre><span class="ruby-comment"># File test/test_greenmonster_spider.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">test_pull_games_prior_to_2008</span>
-  <span class="ruby-constant">Greenmonster</span><span class="ruby-operator">::</span><span class="ruby-constant">Spider</span>.<span class="ruby-identifier">pull_day</span>({<span class="ruby-value">:print_games</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>, <span class="ruby-value">:games_folder</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@local_test_data_location</span>, <span class="ruby-value">:date</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Date</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">2007</span>,<span class="ruby-value">4</span>,<span class="ruby-value">15</span>)})
+  <span class="ruby-constant">Greenmonster</span><span class="ruby-operator">::</span><span class="ruby-constant">Spider</span>.<span class="ruby-identifier">pull_game</span>(<span class="ruby-string">'gid_2007_04_15_detmlb_tormlb_1'</span>, {<span class="ruby-value">:games_folder</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@local_test_data_location</span>, <span class="ruby-value">:print_games</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>})
   
   <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">12</span>, <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">entries</span>(<span class="ruby-ivar">@local_test_data_location</span> <span class="ruby-operator">+</span> <span class="ruby-string">'/mlb/year_2007/month_04/day_15/gid_2007_04_15_detmlb_tormlb_1/inning/'</span>).<span class="ruby-identifier">count</span>
 <span class="ruby-keyword">end</span></pre>
@@ -481,9 +586,9 @@
 
           
           <div class="method-source-code" id="test_pull_single_game_by_game_id-source">
-            <pre><span class="ruby-comment"># File test/test_greenmonster_spider.rb, line 82</span>
+            <pre><span class="ruby-comment"># File test/test_greenmonster_spider.rb, line 88</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">test_pull_single_game_by_game_id</span>
-  <span class="ruby-constant">Greenmonster</span><span class="ruby-operator">::</span><span class="ruby-constant">Spider</span>.<span class="ruby-identifier">pull_game</span>(<span class="ruby-string">'gid_2011_07_04_tormlb_bos_mlb_1'</span>, {<span class="ruby-value">:games_folder</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@local_test_data_location</span>, <span class="ruby-value">:print_games</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>})
+  <span class="ruby-constant">Greenmonster</span><span class="ruby-operator">::</span><span class="ruby-constant">Spider</span>.<span class="ruby-identifier">pull_game</span>(<span class="ruby-string">'gid_2011_07_04_tormlb_bosmlb_1'</span>, {<span class="ruby-value">:games_folder</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@local_test_data_location</span>, <span class="ruby-value">:print_games</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>})
 <span class="ruby-keyword">end</span></pre>
           </div><!-- test_pull_single_game_by_game_id-source -->
           

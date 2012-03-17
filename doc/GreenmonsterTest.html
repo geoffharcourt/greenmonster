@@ -87,6 +87,8 @@
 
   <ul>
   
+    <li class="file"><a href="./Gemfile.html">Gemfile</a>
+  
     <li class="file"><a href="./Rakefile.html">Rakefile</a>
   
   </ul>
@@ -213,7 +215,7 @@
             <pre><span class="ruby-comment"># File test/test_greenmonster.rb, line 8</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">test_set_games_folder_location</span>
   <span class="ruby-constant">Greenmonster</span>.<span class="ruby-identifier">set_games_folder</span>(<span class="ruby-string">'./test_greenmonster_folder'</span>)
-  <span class="ruby-identifier">assert_equal</span> <span class="ruby-string">'./test_greenmonster_folder'</span>, <span class="ruby-constant">Greenmonster</span>.<span class="ruby-identifier">games_folder</span>
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-string">'./test_greenmonster_folder'</span>, <span class="ruby-constant">Greenmonster</span>.<span class="ruby-identifier">games_folder</span>.<span class="ruby-identifier">to_s</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- test_set_games_folder_location-source -->
           
