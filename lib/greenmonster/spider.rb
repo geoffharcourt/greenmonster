@@ -19,12 +19,12 @@ class Greenmonster::Spider
       :print_games => true,
       :games_folder => Greenmonster.games_folder
     }.merge(args)
+    raise "Games folder location required." if args[:games_folder].nil?
+    
     args[:games_folder] = Pathname.new(args[:games_folder])
     
     puts game_id if args[:print_games]
-    
-    raise "Games folder location required." if args[:games_folder].nil?
-          
+        
     paths = {
       :localGameFolder => args[:games_folder] + args[:sport_code] + format_date_as_folder(args[:date]) + game_id,
       :mlbGameFolder => "#{gameday_league_and_date_url(args)}/#{game_id}/"
@@ -86,7 +86,7 @@ class Greenmonster::Spider
     if args[:all_sport_codes]
       args[:sport_codes] = %w(aaa aax afa afx asx bbc fps hsb ind int jml nae naf nas nat naw oly rok win)
     else
-      args[:sport_codes] = [args[:sport_code] || 'mlb']
+      args[:sport_codes] = [args[:sport_code] || 'mlb'].flatten
     end
     
     # Iterate through every hyperlink on the page.
