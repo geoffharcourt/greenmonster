@@ -3,3 +3,4 @@
 Gemfile.lock
 pkg/*
 test/temp_test.rb
+greenmonster_test_games/*

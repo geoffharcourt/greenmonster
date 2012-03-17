@@ -47,6 +47,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
+    <li>lib/greenmonster/version.rb
     <li>lib/greenmonster.rb
   </ul>
 </nav>
@@ -78,6 +79,8 @@
   <h3 class="section-header">Pages</h3>
 
   <ul>
+  
+    <li class="file"><a href="./Gemfile.html">Gemfile</a>
   
     <li class="file"><a href="./Rakefile.html">Rakefile</a>
   
@@ -119,6 +122,19 @@
     
 
     
+    <!-- Constants -->
+    <section id="constants-list" class="section">
+      <h3 class="section-header">Constants</h3>
+      <dl>
+      
+        <dt id="VERSION">VERSION
+        
+        <dd class="description">
+        
+      
+      </dl>
+    </section>
+    
 
     
 
@@ -145,13 +161,13 @@
 
 <pre class="ruby"><span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Greenmonster</span>.<span class="ruby-identifier">set_games_folder</span>(<span class="ruby-string">&quot;/Users/geoff/game_data&quot;</span>)
 <span class="ruby-operator">&gt;&gt;</span> <span class="ruby-constant">Greenmonster</span>.<span class="ruby-identifier">games_folder</span>
-=<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;/Users/geoff/game_data&quot;</span>
+=<span class="ruby-operator">&gt;</span> <span class="ruby-comment">#&lt;Pathname:/Users/geoff/game_data&gt;</span>
 </pre>
           
 
           
           <div class="method-source-code" id="games_folder-source">
-            <pre><span class="ruby-comment"># File lib/greenmonster.rb, line 32</span>
+            <pre><span class="ruby-comment"># File lib/greenmonster.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">games_folder</span>
   <span class="ruby-identifier">@@games_folder</span>
 <span class="ruby-keyword">end</span></pre>
@@ -191,9 +207,9 @@ the server.</p>
 
           
           <div class="method-source-code" id="set_games_folder-source">
-            <pre><span class="ruby-comment"># File lib/greenmonster.rb, line 20</span>
+            <pre><span class="ruby-comment"># File lib/greenmonster.rb, line 24</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">set_games_folder</span>(<span class="ruby-identifier">location</span>)
-  <span class="ruby-identifier">@@games_folder</span> = <span class="ruby-identifier">location</span>
+  <span class="ruby-identifier">@@games_folder</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">location</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- set_games_folder-source -->
           

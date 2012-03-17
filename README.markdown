@@ -47,6 +47,7 @@ Greenmonster::Spider.pull_days((Date.new(2012,4,1)..Date.new(2012,4,30)), {:game
 Requirements
 ------------
 - Ruby 1.9
+- Bundler
 - Nokogiri
 - HTTParty
 
