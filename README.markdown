@@ -24,7 +24,7 @@ Spider.pull_game takes a game_id (the folder name of the game on the Gameday ser
 Greenmonster::Spider.pull_game('gid_2011_07_04_tormlb_bosmlb_1', {:print_games => false})
 ```
 
-Spider.pull_day takes an hash of options as an argument. Greenmonster will create subfolders by MLB "sport_code" (MLB games fall under 'mlb', various minor league games and non-MLB/MiLB games fall under other sport code designations), and then children folders for years, months, days, and specific games.
+Spider.pull_day takes an hash of options as an argument. Greenmonster will create subfolders by MLB "sport_code" (MLB games fall under 'mlb', various minor league games and non-MLB/MiLB games fall under other sport code designations), and then children folders for years, months, days, and specific games. Sport code can be a string or an array of sport code strings.
 
 ```ruby
 # Pulls all MLB games for today
@@ -35,7 +35,12 @@ Greenmonster::Spider.pull_day({:sport_code => 'rok', :date => Date.today, :games
 
 # Pulls all games in all sport codes for today
 Greenmonster::Spider.pull_day({:all_sport_codes => true, :date => Date.today, :games_folder => './home/geoff/games'})
+
+# Pulls all games in rookie and winter league games for January 2nd, 2010
+Greenmonster::Spider.pull_day({:sport_code => ['rok','win'], :date => Date.new(2012,1,2), :games_folder => './home/geoff/games'})
 ```
+
+
 
 Spider.pull_days takes a range of dates to process as an argument, plus a hash of arguments to pass to Spider.pull.
 
