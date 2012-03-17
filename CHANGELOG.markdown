@@ -1,3 +1,7 @@
+0.3.1 / 2012-03-17
+------------------
+* Fixed sport codes as array for scenarios where not all sport codes are used.
+
 0.3.0 / 2012-03-16
 ------------------
 * Moved to bundler for dependency management.
