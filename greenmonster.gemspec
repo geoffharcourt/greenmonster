@@ -11,8 +11,6 @@ Gem::Specification.new do |s|
   s.summary     = %q{A utility for working with MLB Gameday XML data.}
   s.description = %q{A utility for working with MLB Gameday XML data.}
 
-  s.rubyforge_project = "greenmonster"
-
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
