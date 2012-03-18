@@ -169,6 +169,10 @@ module Greenmonster::Spider
     #   date: (Date)
   
     def self.format_date_as_folder(date)
-      date.strftime("year_%Y/month_%m/day_%d")
+      Greenmonster.format_date_as_folder(date)
+    end
+    
+    def self.test_method
+      self.super
     end
 end
