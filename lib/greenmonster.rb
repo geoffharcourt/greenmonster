@@ -5,6 +5,7 @@ require 'httparty'
 require 'nokogiri'
 require 'pathname'
 require 'fileutils'
+require 'date'
 
 module Greenmonster
   @@games_folder = nil
@@ -79,4 +80,5 @@ module Greenmonster
 end
 
 require 'greenmonster/spider'
-require 'greenmonster/player'
+require 'greenmonster/model_extensions/player'
+require 'greenmonster/parser'
