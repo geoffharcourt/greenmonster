@@ -79,3 +79,4 @@ module Greenmonster
 end
 
 require 'greenmonster/spider'
+require 'greenmonster/player'
