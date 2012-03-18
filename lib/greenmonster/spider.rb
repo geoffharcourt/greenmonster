@@ -1,5 +1,5 @@
 # The Gameday XML Spider utility
-class Greenmonster::Spider
+module Greenmonster::Spider
   include HTTParty
   
   ##
