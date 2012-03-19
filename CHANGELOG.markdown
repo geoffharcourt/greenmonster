@@ -1,3 +1,9 @@
+0.4.0 / 2012-03-19
+------------------
+* Added Greenmonster::Player module for mixing in player-specific methods.
+* Added greenmonster:install generator to install player table.
+* Added Greenmonster::Parser module for parsing data out of Gameday XML files after download
+
 0.3.1 / 2012-03-17
 ------------------
 * Fixed sport codes as array for scenarios where not all sport codes are used.

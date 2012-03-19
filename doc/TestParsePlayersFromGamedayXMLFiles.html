@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>class GreenmonsterTest - RDoc Documentation</title>
+<title>class TestParsePlayersFromGamedayXMLFiles - RDoc Documentation</title>
 
 <link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
 
@@ -47,7 +47,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>test/test_greenmonster.rb
+    <li>test/test_parse_players_from_gameday_xml_files.rb
   </ul>
 </nav>
 
@@ -74,7 +74,9 @@
     
     <li><a href="#method-i-teardown">#teardown</a>
     
-    <li><a href="#method-i-test_set_games_folder_location">#test_set_games_folder_location</a>
+    <li><a href="#method-i-test_parse_players_from_game">#test_parse_players_from_game</a>
+    
+    <li><a href="#method-i-test_player_ids_stored_as_integers">#test_player_ids_stored_as_integers</a>
     
   </ul>
 </nav>
@@ -134,7 +136,7 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="class">class GreenmonsterTest</h1>
+  <h1 class="class">class TestParsePlayersFromGamedayXMLFiles</h1>
 
   <div id="description" class="description">
     
@@ -174,8 +176,11 @@
 
           
           <div class="method-source-code" id="setup-source">
-            <pre><span class="ruby-comment"># File test/test_greenmonster.rb, line 5</span>
+            <pre><span class="ruby-comment"># File test/test_parse_players_from_gameday_xml_files.rb, line 6</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">setup</span>
+  <span class="ruby-constant">Greenmonster</span>.<span class="ruby-identifier">set_games_folder</span>(<span class="ruby-string">'./greenmonster_test_games'</span>)
+  <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-constant">Greenmonster</span>.<span class="ruby-identifier">games_folder</span>
+  <span class="ruby-constant">Greenmonster</span><span class="ruby-operator">::</span><span class="ruby-constant">Spider</span>.<span class="ruby-identifier">pull_game</span>(<span class="ruby-string">'gid_2011_07_04_tormlb_bosmlb_1'</span>, {<span class="ruby-value">:print_games</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">false</span>})
 <span class="ruby-keyword">end</span></pre>
           </div><!-- setup-source -->
           
@@ -203,8 +208,9 @@
 
           
           <div class="method-source-code" id="teardown-source">
-            <pre><span class="ruby-comment"># File test/test_greenmonster.rb, line 13</span>
+            <pre><span class="ruby-comment"># File test/test_parse_players_from_gameday_xml_files.rb, line 30</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">teardown</span>
+  <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">remove_dir</span> <span class="ruby-constant">Greenmonster</span>.<span class="ruby-identifier">games_folder</span>
 <span class="ruby-keyword">end</span></pre>
           </div><!-- teardown-source -->
           
@@ -216,10 +222,10 @@
       </div><!-- teardown-method -->
 
     
-      <div id="method-i-test_set_games_folder_location" class="method-detail ">
+      <div id="method-i-test_parse_players_from_game" class="method-detail ">
         
         <div class="method-heading">
-          <span class="method-name">test_set_games_folder_location</span><span
+          <span class="method-name">test_parse_players_from_game</span><span
             class="method-args">()</span>
           <span class="method-click-advice">click to toggle source</span>
         </div>
@@ -231,20 +237,59 @@
           
 
           
-          <div class="method-source-code" id="test_set_games_folder_location-source">
-            <pre><span class="ruby-comment"># File test/test_greenmonster.rb, line 8</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_set_games_folder_location</span>
-  <span class="ruby-constant">Greenmonster</span>.<span class="ruby-identifier">set_games_folder</span>(<span class="ruby-string">'./test_greenmonster_folder'</span>)
-  <span class="ruby-identifier">assert_equal</span> <span class="ruby-string">'./test_greenmonster_folder'</span>, <span class="ruby-constant">Greenmonster</span>.<span class="ruby-identifier">games_folder</span>.<span class="ruby-identifier">to_s</span>
+          <div class="method-source-code" id="test_parse_players_from_game-source">
+            <pre><span class="ruby-comment"># File test/test_parse_players_from_gameday_xml_files.rb, line 12</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_parse_players_from_game</span>
+  <span class="ruby-identifier">players</span> = []
+  <span class="ruby-constant">Greenmonster</span><span class="ruby-operator">::</span><span class="ruby-constant">Parser</span>.<span class="ruby-identifier">extract_players_from_game</span>(<span class="ruby-string">'gid_2011_07_04_tormlb_bosmlb_1'</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">players</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">p</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">players</span>.<span class="ruby-identifier">sort!</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">:id</span>] <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">y</span>[<span class="ruby-value">:id</span>]}
+  
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">50</span>, <span class="ruby-identifier">players</span>.<span class="ruby-identifier">count</span>
 <span class="ruby-keyword">end</span></pre>
-          </div><!-- test_set_games_folder_location-source -->
+          </div><!-- test_parse_players_from_game-source -->
           
         </div>
 
         
 
         
-      </div><!-- test_set_games_folder_location-method -->
+      </div><!-- test_parse_players_from_game-method -->
+
+    
+      <div id="method-i-test_player_ids_stored_as_integers" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">test_player_ids_stored_as_integers</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="test_player_ids_stored_as_integers-source">
+            <pre><span class="ruby-comment"># File test/test_parse_players_from_gameday_xml_files.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">test_player_ids_stored_as_integers</span>
+  <span class="ruby-identifier">players</span> = []
+  <span class="ruby-constant">Greenmonster</span><span class="ruby-operator">::</span><span class="ruby-constant">Parser</span>.<span class="ruby-identifier">extract_players_from_game</span>(<span class="ruby-string">'gid_2011_07_04_tormlb_bosmlb_1'</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">players</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">p</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">assert</span> <span class="ruby-identifier">players</span>.<span class="ruby-identifier">first</span>[<span class="ruby-value">:id</span>].<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">Integer</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- test_player_ids_stored_as_integers-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- test_player_ids_stored_as_integers-method -->
 
     
     </section><!-- public-instance-method-details -->

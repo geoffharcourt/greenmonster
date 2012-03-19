@@ -47,6 +47,10 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
+    <li>lib/generators/greenmonster/install_generator.rb
+    <li>lib/greenmonster/greenmonster.rb
+    <li>lib/greenmonster/model_extensions/player.rb
+    <li>lib/greenmonster/parser.rb
     <li>lib/greenmonster/version.rb
     <li>lib/greenmonster.rb
   </ul>
@@ -65,9 +69,15 @@
 
   <ul class="link-list">
     
+    <li><a href="#method-c-format_date_as_folder">::format_date_as_folder</a>
+    
     <li><a href="#method-c-games_folder">::games_folder</a>
     
     <li><a href="#method-c-set_games_folder">::set_games_folder</a>
+    
+    <li><a href="#method-c-traverse_dates">::traverse_dates</a>
+    
+    <li><a href="#method-c-traverse_folders_for_date">::traverse_folders_for_date</a>
     
   </ul>
 </nav>
@@ -94,11 +104,31 @@
   
     <li><a href="./Greenmonster.html">Greenmonster</a>
   
+    <li><a href="./Greenmonster/Generators.html">Greenmonster::Generators</a>
+  
+    <li><a href="./Greenmonster/Generators/InstallGenerator.html">Greenmonster::Generators::InstallGenerator</a>
+  
+    <li><a href="./Greenmonster/Parser.html">Greenmonster::Parser</a>
+  
+    <li><a href="./Greenmonster/Player.html">Greenmonster::Player</a>
+  
     <li><a href="./Greenmonster/Spider.html">Greenmonster::Spider</a>
+  
+    <li><a href="./Athlete.html">Athlete</a>
+  
+    <li><a href="./GreenmonsterPlayerTest.html">GreenmonsterPlayerTest</a>
   
     <li><a href="./GreenmonsterSpiderTest.html">GreenmonsterSpiderTest</a>
   
     <li><a href="./GreenmonsterTest.html">GreenmonsterTest</a>
+  
+    <li><a href="./GreenmonsterTraversalTest.html">GreenmonsterTraversalTest</a>
+  
+    <li><a href="./InstallGreenmonster.html">InstallGreenmonster</a>
+  
+    <li><a href="./TestCreatePlayersFromGamedayXMLGame.html">TestCreatePlayersFromGamedayXMLGame</a>
+  
+    <li><a href="./TestParsePlayersFromGamedayXMLFiles.html">TestParsePlayersFromGamedayXMLFiles</a>
   
   </ul>
 </nav>
@@ -144,6 +174,36 @@
       <h3 class="section-header">Public Class Methods</h3>
 
     
+      <div id="method-c-format_date_as_folder" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">format_date_as_folder</span><span
+            class="method-args">(date)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="format_date_as_folder-source">
+            <pre><span class="ruby-comment"># File lib/greenmonster.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">format_date_as_folder</span>(<span class="ruby-identifier">date</span>)
+  <span class="ruby-identifier">date</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&quot;year_%Y/month_%m/day_%d&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- format_date_as_folder-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- format_date_as_folder-method -->
+
+    
       <div id="method-c-games_folder" class="method-detail ">
         
         <div class="method-heading">
@@ -167,7 +227,7 @@
 
           
           <div class="method-source-code" id="games_folder-source">
-            <pre><span class="ruby-comment"># File lib/greenmonster.rb, line 36</span>
+            <pre><span class="ruby-comment"># File lib/greenmonster.rb, line 37</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">games_folder</span>
   <span class="ruby-identifier">@@games_folder</span>
 <span class="ruby-keyword">end</span></pre>
@@ -207,7 +267,7 @@ the server.</p>
 
           
           <div class="method-source-code" id="set_games_folder-source">
-            <pre><span class="ruby-comment"># File lib/greenmonster.rb, line 24</span>
+            <pre><span class="ruby-comment"># File lib/greenmonster.rb, line 25</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">set_games_folder</span>(<span class="ruby-identifier">location</span>)
   <span class="ruby-identifier">@@games_folder</span> = <span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">location</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -219,6 +279,83 @@ the server.</p>
 
         
       </div><!-- set_games_folder-method -->
+
+    
+      <div id="method-c-traverse_dates" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">traverse_dates</span><span
+            class="method-args">(range = (Date.today..Date.today), args = {}) { |day,args| ... }</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Walk the dates in a range of dates, and execute whatever methods on the
+date and argument set specified. Used when  processing games and players.</p>
+          
+
+          
+          <div class="method-source-code" id="traverse_dates-source">
+            <pre><span class="ruby-comment"># File lib/greenmonster.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">traverse_dates</span>(<span class="ruby-identifier">range</span> = (<span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span><span class="ruby-operator">..</span><span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>), <span class="ruby-identifier">args</span> = {})
+   <span class="ruby-identifier">range</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">day</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">yield</span> <span class="ruby-identifier">day</span>,<span class="ruby-identifier">args</span>
+   <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- traverse_dates-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- traverse_dates-method -->
+
+    
+      <div id="method-c-traverse_folders_for_date" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">traverse_folders_for_date</span><span
+            class="method-args">(day,args = {}) { |gdir, args| ... }</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Walk the game folders in a range of dates, and execute whatever methods on
+the game folder and argument set specified. Used when  processing games and
+players.</p>
+          
+
+          
+          <div class="method-source-code" id="traverse_folders_for_date-source">
+            <pre><span class="ruby-comment"># File lib/greenmonster.rb, line 65</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">traverse_folders_for_date</span>(<span class="ruby-identifier">day</span>,<span class="ruby-identifier">args</span> = {})
+   <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">folders</span> = <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">entries</span>(<span class="ruby-constant">Pathname</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">args</span>[<span class="ruby-value">:games_folder</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">@@games_folder</span>) <span class="ruby-operator">+</span> (<span class="ruby-identifier">args</span>[<span class="ruby-value">:sport_code</span>] <span class="ruby-operator">||</span> <span class="ruby-string">'mlb'</span>) <span class="ruby-operator">+</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">format_date_as_folder</span>(<span class="ruby-identifier">day</span>))
+   <span class="ruby-keyword">rescue</span> <span class="ruby-constant">StandardError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">boom</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;No files for #{day.to_s}.&quot;</span>
+   <span class="ruby-keyword">end</span>
+
+   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">folders</span>.<span class="ruby-identifier">nil?</span>
+      <span class="ruby-identifier">folders</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">gdir</span><span class="ruby-operator">|</span>
+         <span class="ruby-keyword">if</span> <span class="ruby-identifier">gdir</span>[<span class="ruby-value">0</span>,<span class="ruby-value">3</span>] <span class="ruby-operator">==</span> <span class="ruby-string">'gid'</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">gdir</span>[<span class="ruby-value">-4</span>,<span class="ruby-value">4</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&quot;_bak&quot;</span>
+            <span class="ruby-keyword">yield</span> <span class="ruby-identifier">gdir</span>, <span class="ruby-identifier">args</span>
+         <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+   <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- traverse_folders_for_date-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- traverse_folders_for_date-method -->
 
     
     </section><!-- public-class-method-details -->

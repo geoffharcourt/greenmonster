@@ -3,10 +3,16 @@ Greenmonster
 
 Greenmonster is a toolkit for baseball stat enthusiasts or sabermetricians to build a database of play-by-play stats from MLB's [Gameday XML data](http://gd.mlb.com/components/game/).
 
-The gem currently spiders games from MLB's servers. Over the season, I will be extracting pieces out of my toolkit to parse Gameday XML data to produce play-by-play database of MLB and MiLB stats.
+The provides three tools:
+* Spidering of MLB/MiLB games
+* Parsing of Gameday XML
+* Mixin methods you can use to extend your own classes
 
 Usage 
------
+=====
+
+Spider
+------
 
 If you don't want to specify a download location every time you run the spider, you can set a default games folder location using Greenmonster.set_games_location:
 
@@ -49,12 +55,37 @@ Spider.pull_days takes a range of dates to process as an argument, plus a hash o
 Greenmonster::Spider.pull_days((Date.new(2012,4,1)..Date.new(2012,4,30)), {:games_folder => './home/geoff/games'})
 ```	
 
+Mixins
+------
+
+As of version 0.4.0, Greenmonster provides the Greenmonster::Player module which can be used to extend any Ruby class you use that represents players. Include the module in your class to get Greenmonster-specific functionality like parsing players out of games.
+
+```ruby
+class MlbPlayer < ActiveRecord::Base
+   include Greenmonster::Player
+end
+
+>> MlbPlayer.create_from_gameday_xml_game('gid_2011_07_04_tormlb_bosmlb_1')
+```
+
+Migrations
+----------
+
+If you use ActiveRecord, Greenmonster provides a generator that can generate tables for Greenmonster data. Add Greenmonster to your Gemfile:
+```ruby
+gem 'greenmonster', '~> 0.4.0'
+```
+
+After you pull the gem in with Bundler, you will have access to Greenmonster generators. The Install generator attempts to install a set of standard name tables that correspond to Greenmonster data. 
+
+
 Requirements
 ------------
 - Ruby 1.9
 - Bundler
 - Nokogiri
 - HTTParty
+- ActiveRecord (if you want to use migration generators or any mixins that involve AR saves)
 
 Testing
 -------
