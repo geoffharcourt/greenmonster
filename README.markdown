@@ -55,8 +55,9 @@ Spider.pull_days takes a range of dates to process as an argument, plus a hash o
 Greenmonster::Spider.pull_days((Date.new(2012,4,1)..Date.new(2012,4,30)), {:games_folder => './home/geoff/games'})
 ```	
 
-Mixins
-------
+Mixins (ALPHA)
+--------------
+(Under development.)
 
 As of version 0.4.0, Greenmonster provides the Greenmonster::Player module which can be used to extend any Ruby class you use that represents players. Include the module in your class to get Greenmonster-specific functionality like parsing players out of games.
 
@@ -68,8 +69,10 @@ end
 >> MlbPlayer.create_from_gameday_xml_game('gid_2011_07_04_tormlb_bosmlb_1')
 ```
 
-Migrations
-----------
+Migrations (ALPHA)
+------------------
+
+WARNING: THIS FEATURE IS UNDER DEVELOPMENT. USE AT YOUR OWN RISK.
 
 If you use ActiveRecord, Greenmonster provides a generator that can generate tables for Greenmonster data. Add Greenmonster to your Gemfile:
 ```ruby
