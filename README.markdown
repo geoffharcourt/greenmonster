@@ -72,7 +72,8 @@ end
 Migrations (ALPHA)
 ------------------
 
-WARNING: THIS FEATURE IS UNDER DEVELOPMENT. USE AT YOUR OWN RISK.
+WARNING: THIS FEATURE IS UNDER DEVELOPMENT. USE AT YOUR OWN RISK. 
+ANOTHER WARNING: Using migrations on alpha/beta/pre versions of Greenmonster may not be compatible with formal releases that come later.
 
 If you use ActiveRecord, Greenmonster provides a generator that can generate tables for Greenmonster data. Add Greenmonster to your Gemfile:
 ```ruby
