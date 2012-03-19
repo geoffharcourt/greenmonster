@@ -27,7 +27,6 @@ class InstallGreenmonster < ActiveRecord::Migration
     add_index "players", ["korea_kbo_id"], :name => "players-korea_kbo_id"
     add_index "players", ["lahman_id"], :name => "players-lahman_id"
     add_index "players", ["retrosheet_id"], :name => "players-retrosheet_id"
-    add_index "players", ["stats_inc_id"], :name => "players-stats_inc_id"
     add_index "players", ["uuid"], :name => "players-uuid"
     add_index "players", ["westbay_id"], :name => "players-westbay_id"
   end
