@@ -20,18 +20,10 @@ class Athlete < SuperModel::Base
   end
 end
 
-class GreenmonsterPlayerTest < MiniTest::Unit::TestCase
+class TestCreatePlayersFromGamedayXMLGame < MiniTest::Unit::TestCase
   def test_create_players_from_gameday_xml_game
     Athlete.create_from_gameday_xml_game('gid_2011_07_04_tormlb_bosmlb_1')
     assert_equal 50, Athlete.all.count
-  end
-  
-  def fake_test
-    assert true
-  end
-  
-  def fake_test_two
-    flunk
   end
   
   def setup

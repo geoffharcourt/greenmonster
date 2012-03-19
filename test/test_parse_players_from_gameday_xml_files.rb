@@ -2,7 +2,7 @@ require 'minitest/autorun'
 require 'greenmonster'
 require 'date'
 
-class ParsePlayersFromGamedayXMLFiles < MiniTest::Unit::TestCase
+class TestParsePlayersFromGamedayXMLFiles < MiniTest::Unit::TestCase
   def setup
     Greenmonster.set_games_folder('./greenmonster_test_games')
     FileUtils.mkdir_p Greenmonster.games_folder
