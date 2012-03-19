@@ -1,17 +1,14 @@
 require 'minitest/autorun'
 require 'greenmonster'
+require 'supermodel'
 
-Athlete = Class.new do 
+class Athlete < SuperModel::Base
   attr_accessor :first, :last
   include Greenmonster::Player
 end
 
 class GreenmonsterPlayerTest < MiniTest::Unit::TestCase
   def test_to_s
-    a = Athlete.new
-    a.first = "Roy"
-    a.last = "Hobbs"
-    
-    assert_equal "Roy Hobbs", a.to_s
-  end
+    assert_equal "Roy Hobbs", Athlete.new({:first => 'Roy', :last => 'Hobbs'}).to_s
+  end 
 end

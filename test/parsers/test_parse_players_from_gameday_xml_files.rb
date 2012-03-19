@@ -26,7 +26,7 @@ class ParsePlayersFromGamedayXMLFiles < MiniTest::Unit::TestCase
     end
     assert players.first[:id].kind_of? Integer
   end
-  
+
   def teardown
     FileUtils.remove_dir Greenmonster.games_folder
   end
