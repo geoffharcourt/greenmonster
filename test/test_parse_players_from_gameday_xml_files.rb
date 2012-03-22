@@ -4,9 +4,7 @@ require 'date'
 
 class TestParsePlayersFromGamedayXMLFiles < MiniTest::Unit::TestCase
   def setup
-    Greenmonster.set_games_folder('./greenmonster_test_games')
-    FileUtils.mkdir_p Greenmonster.games_folder
-    Greenmonster::Spider.pull_game('gid_2011_07_04_tormlb_bosmlb_1', {:print_games => false})
+    Greenmonster.set_games_folder('./test/games')
   end
   
   def test_parse_players_from_game
@@ -25,9 +23,5 @@ class TestParsePlayersFromGamedayXMLFiles < MiniTest::Unit::TestCase
       players << p
     end
     assert players.first[:id].kind_of? Integer
-  end
-
-  def teardown
-    FileUtils.remove_dir Greenmonster.games_folder
   end
 end
