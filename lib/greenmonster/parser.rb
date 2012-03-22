@@ -1,5 +1,11 @@
 module Greenmonster
   module Parser
+    def self.load_line_score(gid, args = {})
+      Nokogiri::XML(File.open(game_path(gid, args) + 'linescore.xml')).search("game").first
+    rescue
+      false
+    end 
+    
     def self.extract_players_from_game(gid, args = {})
       Nokogiri::XML(open(game_path(gid,args) + 'players.xml')).search('player').each do |p|
         hash = {:id => p.attribute('id').value.to_i, :first => p.attribute('first').value, :last => p.attribute('last').value}
