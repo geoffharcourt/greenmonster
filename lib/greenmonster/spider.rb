@@ -171,8 +171,4 @@ module Greenmonster::Spider
     def self.format_date_as_folder(date)
       Greenmonster.format_date_as_folder(date)
     end
-    
-    def self.test_method
-      self.super
-    end
 end
