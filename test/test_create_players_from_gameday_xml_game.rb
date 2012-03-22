@@ -27,12 +27,6 @@ class TestCreatePlayersFromGamedayXMLGame < MiniTest::Unit::TestCase
   end
   
   def setup
-    Greenmonster.set_games_folder('./greenmonster_test_games')
-    FileUtils.mkdir_p Greenmonster.games_folder
-    Greenmonster::Spider.pull_game('gid_2011_07_04_tormlb_bosmlb_1', {:print_games => false})
-  end
-  
-  def teardown
-    FileUtils.remove_dir Greenmonster.games_folder
+    Greenmonster.set_games_folder('./test/games')
   end
 end
