@@ -21,4 +21,5 @@ Gem::Specification.new do |s|
   s.add_dependency "activerecord"
   s.add_development_dependency "minitest"
   s.add_development_dependency "supermodel"
+  s.add_development_dependency "sqlite3-ruby"
 end
