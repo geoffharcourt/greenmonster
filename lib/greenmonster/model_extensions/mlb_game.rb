@@ -81,8 +81,11 @@ module Greenmonster
         
         if line_score
           game = self.find_or_initialize_by_id(line_score.attributes["game_pk"].value.to_i)
+        
+          game.save!
+          return game
         else
-          false
+          return false
         end
       end
     end
