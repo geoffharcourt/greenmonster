@@ -1,11 +1,6 @@
 require './test/test_helper.rb'
 
 class GreenmonsterTraversalTest < MiniTest::Unit::TestCase
-  def setup
-    Greenmonster.set_games_folder "./greenmonster_test_games"
-    FileUtils.mkdir_p Greenmonster.games_folder
-  end
-  
   def test_traverse_dates_across_range
     assert_equal (Date.new(2012,4,15)..Date.new(2012,4,30)), Greenmonster.traverse_dates(Date.new(2012,4,15)..Date.new(2012,4,30)) {|g,a| g}
   end
@@ -36,9 +31,5 @@ class GreenmonsterTraversalTest < MiniTest::Unit::TestCase
         g == 'gid_2012_03_27_aaatst_aabtst_1'
       end
     end
-  end
-  
-  def teardown
-    FileUtils.remove_dir Greenmonster.games_folder
   end
 end
