@@ -1,5 +1,4 @@
-require 'minitest/autorun'
-require 'greenmonster'
+require './test/test_helper.rb'
 
 class GreenmonsterTest < MiniTest::Unit::TestCase
   def setup

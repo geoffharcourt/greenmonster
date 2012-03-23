@@ -1,4 +1,4 @@
-require "sqlite3-ruby"
+require "sqlite3"
 require "supermodel"
 require 'minitest/autorun'
 require 'greenmonster'

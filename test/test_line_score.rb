@@ -1,6 +1,4 @@
-require 'minitest/autorun'
-require 'greenmonster'
-require 'supermodel'
+require './test/test_helper.rb'
 
 class GamedayGame < SuperModel::Base
   include Greenmonster::MlbGame

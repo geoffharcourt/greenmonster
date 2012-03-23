@@ -1,6 +1,4 @@
-require 'minitest/autorun'
-require 'greenmonster'
-require 'date'
+require './test/test_helper.rb'
 
 class TestParsePlayersFromGamedayXMLFiles < MiniTest::Unit::TestCase
   def setup

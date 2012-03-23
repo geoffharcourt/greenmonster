@@ -1,6 +1,4 @@
-require 'minitest/autorun'
-require 'greenmonster'
-require 'supermodel'
+require './test/test_helper.rb'
 
 class Athlete < SuperModel::Base
   attr_accessor :first, :last
