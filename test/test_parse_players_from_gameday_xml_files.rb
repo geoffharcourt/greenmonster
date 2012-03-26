@@ -1,12 +1,6 @@
-require 'minitest/autorun'
-require 'greenmonster'
-require 'date'
+require './test/test_helper.rb'
 
-class TestParsePlayersFromGamedayXMLFiles < MiniTest::Unit::TestCase
-  def setup
-    Greenmonster.set_games_folder('./test/games')
-  end
-  
+class TestParsePlayersFromGamedayXMLFiles < MiniTest::Unit::TestCase  
   def test_parse_players_from_game
     players = []
     Greenmonster::Parser.extract_players_from_game('gid_2011_07_04_tormlb_bosmlb_1') do |p|

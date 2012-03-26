@@ -1,23 +1,4 @@
-require 'minitest/autorun'
-require 'greenmonster'
-require 'supermodel'
-
-class GamedayGame < SuperModel::Base
-  include Greenmonster::MlbGame
-  
-  def self.find_or_initialize_by_id(id_number)
-    begin
-      a = self.find(id_number)
-    rescue
-    end
-    
-    if a.nil?
-      return self.find_or_create_by_id(id_number)
-    else
-      return a
-    end
-  end
-end
+require './test/test_helper.rb'
 
 class TestCreateMlbGameFromGamedayXMLGame < MiniTest::Unit::TestCase
   def test_create_game_data_from_gameday_xml_game
@@ -27,15 +8,5 @@ class TestCreateMlbGameFromGamedayXMLGame < MiniTest::Unit::TestCase
 
   def test_fail_gracefully_if_game_does_not_have_data
     refute GamedayGame.create_from_gameday_xml_game('gid_2011_07_04_tormlb_bosmlb_8')
-  end
-  
-  def setup
-    Greenmonster.set_games_folder('./greenmonster_test_games')
-    FileUtils.mkdir_p Greenmonster.games_folder
-    Greenmonster::Spider.pull_game('gid_2011_07_04_tormlb_bosmlb_1', {:print_games => false})
-  end
-  
-  def teardown
-    FileUtils.remove_dir Greenmonster.games_folder
   end
 end

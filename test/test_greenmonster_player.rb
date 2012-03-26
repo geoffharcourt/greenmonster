@@ -1,11 +1,4 @@
-require 'minitest/autorun'
-require 'greenmonster'
-require 'supermodel'
-
-class Athlete < SuperModel::Base
-  attr_accessor :first, :last
-  include Greenmonster::Player
-end
+require './test/test_helper.rb'
 
 class GreenmonsterPlayerTest < MiniTest::Unit::TestCase
   def test_to_s

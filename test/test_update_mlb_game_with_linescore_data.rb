@@ -1,34 +1,4 @@
-require 'minitest/autorun'
-require 'greenmonster'
-require 'supermodel'
-
-class GamedayGame < SuperModel::Base
-  attr_accessor :game_id
-  
-  include Greenmonster::MlbGame
-  
-  def self.find_or_initialize_by_id(id_number)
-    begin
-      a = self.find(id_number)
-    rescue
-    end
-    
-    if a.nil?
-      return self.find_or_create_by_id(id_number)
-    else
-      return a
-    end
-  end
-  
-  def self.where(args = nil)
-    case args.class.to_s
-    when "String"
-      return []
-    when "Hash"
-      return self
-    end
-  end
-end
+require './test/test_helper.rb'
 
 class TestUpdateMlbGameWithLinescore < MiniTest::Unit::TestCase
   def test_update_with_linescore_data
@@ -49,9 +19,5 @@ class TestUpdateMlbGameWithLinescore < MiniTest::Unit::TestCase
     assert_equal 'mlb', g.sport_code
     assert_equal 103, g.home_league_id
     assert_equal 103, g.away_league_id
-  end
-
-  def setup
-    Greenmonster.set_games_folder('./test/games')
   end
 end

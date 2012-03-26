@@ -5,6 +5,7 @@ require 'httparty'
 require 'nokogiri'
 require 'pathname'
 require 'fileutils'
+require 'active_record'
 require 'date'
 
 module Greenmonster
