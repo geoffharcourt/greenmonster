@@ -1,4 +1,4 @@
-class InstallMlbGames < ActiveRecord::Migration
+class InstallGreenmonsterMlbGames < ActiveRecord::Migration
   def self.up
 	  create_table "mlb_games", :force => true do |t|
     	t.date     "date"

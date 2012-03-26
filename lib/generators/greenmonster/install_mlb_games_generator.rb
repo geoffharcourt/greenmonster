@@ -13,7 +13,7 @@ module Greenmonster
       end
 
       def create_migration_file
-        migration_template 'install_mlb_games_migration.rb', 'db/migrate/install_greenmonster_mlb_games.rb'
+        migration_template 'install_greenmonster_mlb_games_migration.rb', 'db/migrate/install_greenmonster_mlb_games.rb'
       end
     end
   end

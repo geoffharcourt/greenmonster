@@ -1,4 +1,4 @@
-class InstallPlayers < ActiveRecord::Migration
+class InstallGreenmonsterPlayers < ActiveRecord::Migration
   def self.up
     create_table "players", :force => true do |t|
       t.string   "first"
