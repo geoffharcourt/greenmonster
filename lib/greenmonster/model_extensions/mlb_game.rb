@@ -70,7 +70,20 @@ module Greenmonster
       # Set teams
       self.home_team_id = line_score.attributes["home_team_id"].value.to_i if line_score.attributes["home_team_id"]
       self.away_team_id = line_score.attributes["away_team_id"].value.to_i if line_score.attributes["away_team_id"]
-    
+      
+      possible_duplicate = self.class.where(:id => self.game_pk, :game_status => ["F","FR"]).where("date <= '#{self.date}'").first
+      
+      raise "Gotcha" if possible_duplicate
+      
+      begin
+        puts "PD: #{possible_duplicate}"
+        puts "PD_id: #{self.game_id}"
+      rescue
+        puts "rescued"
+      end
+      
+      return false if possible_duplicate and possible_duplicate.game_id != self.game_id 
+      
       return self.save
     end
     
