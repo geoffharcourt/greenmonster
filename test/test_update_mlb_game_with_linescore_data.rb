@@ -3,6 +3,8 @@ require 'greenmonster'
 require 'supermodel'
 
 class GamedayGame < SuperModel::Base
+  attr_accessor :game_id
+  
   include Greenmonster::MlbGame
   
   def self.find_or_initialize_by_id(id_number)
@@ -15,6 +17,15 @@ class GamedayGame < SuperModel::Base
       return self.find_or_create_by_id(id_number)
     else
       return a
+    end
+  end
+  
+  def self.where(args = nil)
+    case args.class.to_s
+    when "String"
+      return []
+    when "Hash"
+      return self
     end
   end
 end
