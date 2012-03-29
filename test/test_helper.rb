@@ -50,6 +50,13 @@ class CreateSchema < ActiveRecord::Migration
     	t.string   "home_sport_code"
     	t.integer  "last_event_processed"
     end
+
+    create_table :probable_pitchers, :force => true  do |t|
+      t.integer "game_pk"
+      t.date "date"
+      t.integer "player_id"
+      t.string "side"
+    end
   end
 end
 
@@ -59,9 +66,12 @@ class Athlete < ActiveRecord::Base
   include Greenmonster::Player
 end
 
-
 class GamedayGame < ActiveRecord::Base
   include Greenmonster::MlbGame
+end
+
+class ProbablePitcher < ActiveRecord::Base
+  include Greenmonster::MlbProbablePitcher
 end
 
 Greenmonster.set_games_folder('./test/games')

@@ -83,4 +83,5 @@ end
 require 'greenmonster/spider'
 require 'greenmonster/model_extensions/player'
 require 'greenmonster/model_extensions/mlb_game'
+require 'greenmonster/model_extensions/mlb_probable_pitcher'
 require 'greenmonster/parser'
