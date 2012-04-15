@@ -27,6 +27,18 @@ class GreenmonsterSpiderTest < MiniTest::Unit::TestCase
     assert_equal 400023, Nokogiri::XML(open(paths[:localGameFolder] + 'inning/inning_all.xml')).search("atbat").first.attribute('batter').value.to_i
   end
   
+  def test_copy_gameday_xml_downloads_file_when_it_has_bad_encoding
+    paths = {
+      :localGameFolder => "#{@local_test_data_location}/mlb/year_2012/month_04/day_10/gid_2012_04_10_arimlb_sdnmlb_1/",
+      :mlbGameFolder => "http://gd2.mlb.com/components/game/mlb/year_2012/month_04/day_10/gid_2012_04_10_arimlb_sdnmlb_1/"
+    }
+    FileUtils.mkdir_p paths[:localGameFolder] + 'inning'
+
+    Greenmonster::Spider.copy_gameday_xml('inning_all.xml',paths)
+    
+    assert_equal 11, Nokogiri::XML(open(paths[:localGameFolder] + '/inning/inning_all.xml')).search("inning").count
+  end
+  
   def test_pull_day
     Greenmonster::Spider.pull_day({:print_games => false, :games_folder => @local_test_data_location, :date => Date.new(2011,6,7)})
     
