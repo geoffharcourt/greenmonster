@@ -38,8 +38,9 @@ module Greenmonster::Spider
       copy_gameday_xml('linescore.xml',paths)
       
       if args[:date].year > 2007
-        copy_gameday_xml('inning_all.xml',paths)
-        copy_gameday_xml('inning_hit.xml',paths)
+        ['inning_all.xml', 'inning_hit.xml'].each do |file|
+          copy_gameday_xml(file,paths)
+        end
       else
         # Iterate through the inning files, but skip inning 
         # files numbered 0 (some bad spring training data).
@@ -150,7 +151,7 @@ module Greenmonster::Spider
     #   paths: (Hash)
   
     def self.copy_gameday_xml (file_name,paths)
-      download = self.get(paths[:mlbGameFolder] + "#{file_name =~ /inning/ ? 'inning/' : ''}" + file_name).body
+      download = self.get(paths[:mlbGameFolder] + "#{file_name =~ /inning/ ? 'inning/' : ''}" + file_name).body.force_encoding("ISO-8859-1").encode("UTF-8")
       unless download.include?('404 Not Found')
         open(paths[:localGameFolder] + (file_name =~ /inning/ ? 'inning/' : '') + file_name, 'w') do |file|
           file.write(download) 
