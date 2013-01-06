@@ -2,13 +2,13 @@ require "rubygems"
 require "bundler/setup"
 
 require 'httparty'
-#require 'nokogiri'
-#require 'pathname'
-#require 'fileutils'
-#require 'active_record'
+require 'nokogiri'
+require 'fileutils'
 require 'date'
 
 module Greenmonster
+  SPORT_CODES = %w(aaa aax afa afx asx bbc fps hsb ind int jml nae naf nas nat naw oly rok win)
+
   @@games_folder = nil
 
   ##

@@ -1,5 +1,5 @@
 # The Gameday XML Spider utility
-module Greenmonster::Spider
+class Greenmonster::Spider
   include HTTParty
 
   ##
@@ -12,55 +12,12 @@ module Greenmonster::Spider
   # Example:
   #  >> Gameday::Spider.pull_game('',{:games_folder => })
 
-  def self.pull_game(game_id,args = {})
-    args = {
-      :date => args[:date] || Date.new(game_id[4,4].to_i, game_id[9,2].to_i, game_id[12,2].to_i),
-      :sport_code => args[:sport_code] || game_id[25,3],
-      :print_games => true,
-      :games_folder => Greenmonster.games_folder
-    }.merge(args)
-    raise "Games folder location required." if args[:games_folder].nil?
+  def pull_game(game_id, date)
+    make_folders_for_game(game_id, date)
 
-    args[:games_folder] = Pathname.new(args[:games_folder])
-
-    puts game_id if args[:print_games]
-
-    paths = {
-      :localGameFolder => args[:games_folder] + args[:sport_code] + format_date_as_folder(args[:date]) + game_id,
-      :mlbGameFolder => "#{gameday_league_and_date_url(args)}/#{game_id}/"
-    }
-
-    FileUtils.mkdir_p paths[:localGameFolder] + 'inning'
-
-    begin
-      # Always copy linescore first. If we can't get this
-      # data, all other game data is useless.
-      copy_gameday_xml('linescore.xml',paths)
-
-      if args[:date].year > 2007
-        ['inning_all.xml', 'inning_hit.xml'].each do |file|
-          copy_gameday_xml(file,paths)
-        end
-      else
-        # Iterate through the inning files, but skip inning
-        # files numbered 0 (some bad spring training data).
-        # Necessary for games prior to 2008 because there is
-        # no inning_all.xml file in older games.
-        (Nokogiri::XML(self.get("#{paths[:mlbGameFolder]}/inning/").body).search('a')).each do |ic|
-          copy_gameday_xml(ic.attribute('href').value,paths) if ic.attribute('href').value[-3,3]  == "xml" unless ic.attribute('href').value[-6,6] == "_0.xml" or ic.attribute('href').value.include?('Score')
-        end
-      end
-
-      # Copy base data files
-      # (if inning data wasn't there, this gets skipped)
-      ['boxscore.xml','eventLog.xml','players.xml'].each do |file|
-        copy_gameday_xml(file,paths)
-      end
-    rescue StandardError => bang
-      puts "Unable to download some data for #{game_id}"
+    %w(boxscore.xml game_events.xml inning_all.xml linescore.xml players.xml).each do |file_name|
+      copy_gameday_xml(game_id, date, file_name)
     end
-
-    return game_id
   end
 
   ##
@@ -77,32 +34,10 @@ module Greenmonster::Spider
   #  args: (Hash)
   #
 
-  def self.pull_day(args = {})
-    args = {
-      :date => Date.today,
-      :sport_code => 'mlb',
-    }.merge(args)
-
-    # If we want all sport codes, set up the array.
-    if args[:all_sport_codes]
-      args[:sport_codes] = %w(aaa aax afa afx asx bbc fps hsb ind int jml nae naf nas nat naw oly rok win)
-    else
-      args[:sport_codes] = [args[:sport_code] || 'mlb'].flatten
+  def pull_day(date, sport_code)
+    game_links_on_gameday_date_page(date, sport_code).each do |game_id|
+      pull_game(game_id, date)
     end
-
-    # Iterate through every hyperlink on the page.
-    # These links represent the individual game folders
-    # for each date. Reject any links that aren't to game
-    # folders or that are to what look like backup game
-    # folders.
-    args[:sport_codes].each do |sport_code|
-      args[:sport_code] = sport_code
-      (Nokogiri::XML(self.get(gameday_league_and_date_url(args)))/"a").reject{|l| l.attribute('href').value[0,4] != "gid_" or l.attribute('href').value[-5,4] == "_bak"}.each do |e|
-        self.pull_game(e.attribute('href').value.gsub('/',''),args)
-      end
-    end
-
-    return args[:sport_code]
   end
 
   ##
@@ -117,59 +52,89 @@ module Greenmonster::Spider
   #  range: (Range)
   #  args: (Hash)
 
-  def self.pull_days(range,args = {})
-    range.each {|day| self.pull_day(args.merge({:date => day}))}
+  def pull_days(range, sport_code)
+    range.each { |date| self.pull_day(date, sport_code) }
   end
 
+
   private
-    ##
-    # Return the Gameday URL for a given sport_code
-    # and date. Argument must include :date, but
-    # :sport_code will be assumed to be 'mlb' if not
-    # specified.
-    #
-    # Arguments:
-    #  args: (Hash)
-    #
-    def self.gameday_league_and_date_url(args = {})
-      raise "Date required." unless args[:date]
-      args[:sport_code] ||= 'mlb'
 
-      "http://gd2.mlb.com/components/game/#{args[:sport_code]}/#{format_date_as_folder(args[:date])}"
+  def get_gameday_date_page(date, sport_code)
+    self.class.get(gameday_date_and_sport_code_url(date, sport_code))
+  end
+
+  def links_on_gameday_date_page(date, sport_code)
+    Nokogiri::XML(get_gameday_date_page(date, sport_code)).search('a').map do |a|
+      a.attribute('href').value
     end
+  end
 
-    ##
-    # Copy XML files from the Gameday severs to your
-    # local machine for parsing and analysis. This method
-    # is used by Spider pull class methods to put files on
-    # your local machine in a similar layout to the one used by
-    # Gameday. The paths argument gets built by Spider.pull
-    # during the pull process.
-    #
-    # Arguments:
-    #  file_name: (String)
-    #  paths: (Hash)
+  def game_links_on_gameday_date_page(date, sport_code)
+    links_on_gameday_date_page(date, sport_code).select do |link|
+      link[0,4] == "gid_" && link[-5,4] != "_bak"
+    end
+  end
 
-    def self.copy_gameday_xml (file_name,paths)
-      download = self.get(paths[:mlbGameFolder] + "#{file_name =~ /inning/ ? 'inning/' : ''}" + file_name).body.force_encoding("ISO-8859-1").encode("UTF-8")
-      unless download.include?('404 Not Found')
-        open(paths[:localGameFolder] + (file_name =~ /inning/ ? 'inning/' : '') + file_name, 'w') do |file|
-          file.write(download)
-        end
+  def gameday_url_root
+    "http://gd2.mlb.com/components/game/"
+  end
+
+  def gameday_date_and_sport_code_url(date, sport_code)
+    "#{gameday_url_root}#{sport_code}/#{format_date_as_folder(date)}"
+  end
+
+  def gameday_game_url(game_id, date)
+    gameday_url_root + remote_game_path(game_id, date)
+  end
+
+  def remote_game_path(game_id, date)
+    "#{home_sport_code_from_game_id(game_id)}/#{format_date_as_folder(date)}/#{game_id}"
+  end
+
+  def home_sport_code_from_game_id(game_id)
+    game_id[-5,3]
+  end
+
+  def inning_prefix(file_name)
+    if file_name =~ /inning/
+      'inning/'
+    else
+      ''
+    end
+  end
+
+  def remote_file_url(game_id, date, file_name)
+    gameday_game_url(game_id, date) + '/' + inning_prefix(file_name) + '/' + file_name
+  end
+
+  def download_gameday_xml(game_id, date, file_name)
+    self.class.get(remote_file_url(game_id, date, file_name)).body.force_encoding("ISO-8859-1").encode("UTF-8")
+  end
+
+  def local_game_path(game_id, date)
+    Pathname.new(
+      Greenmonster.games_folder +
+      home_sport_code_from_game_id(game_id) +
+      format_date_as_folder(date) +
+      game_id
+    )
+  end
+
+  def copy_gameday_xml(game_id, date, file_name)
+    download = download_gameday_xml(game_id, date, file_name)
+
+    unless download.include?('404 Not Found')
+      open(local_game_path(game_id, date) + inning_prefix(file_name) + file_name, 'w') do |file|
+        file.write(download)
       end
     end
+  end
 
-    ##
-    # Output a folder format similar to the one used by Gameday.
-    #
-    # Example:
-    #  >> Spider.format_date_as_folder(Date.new(2011,7,4))
-    #  => "year_2011/month_07/day_04"
-    #
-    # Arguments:
-    #  date: (Date)
+  def format_date_as_folder(date)
+    Greenmonster.format_date_as_folder(date)
+  end
 
-    def self.format_date_as_folder(date)
-      Greenmonster.format_date_as_folder(date)
-    end
+  def make_folders_for_game(game_id, date)
+    FileUtils.mkdir_p(local_game_path(game_id, date) + 'inning')
+  end
 end
