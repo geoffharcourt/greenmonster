@@ -1,14 +1,9 @@
 Greenmonster
 ============
 
-Greenmonster is a toolkit for baseball stat enthusiasts or sabermetricians to build a database of play-by-play stats from MLB's [Gameday XML data](http://gd.mlb.com/components/game/).
+Greenmonster is a toolkit for baseball stat enthusiasts or sabermetricians to build a database of play-by-play stats from MLB's [Gameday XML data](http://gd.mlb.com/components/game/). The current tool provides the ability to spider Gameday XML data from MLB's servers for personal research. Future iterations of the tool will provide the ability to parse the data and store it in a SQL database.
 
-The provides three tools:
-* Spidering of MLB/MiLB games
-* Parsing of Gameday XML
-* Mixin methods you can use to extend your own classes
-
-Usage 
+Usage
 =====
 
 Spider
@@ -21,66 +16,39 @@ If you don't want to specify a download location every time you run the spider, 
 Greenmonster.set_games_folder('/Users/geoff/games/')
 ```
 
-The spider utility has three public class methods: Spider.pull_game, Spider.pull_day, and Spider.pull_days. 
+The spider utility has three public class methods: Spider.pull_game, Spider.pull_day, and Spider.pull_days.
 
-Spider.pull_game takes a game_id (the folder name of the game on the Gameday server) and a hash of options as arguments. If for some reason the game does not fall in the expected folder for the game's date or sport code, you can add those options to the arguments hash. Other options include :games_folder and :print_games (if false, game IDs are not printed to screen).
+Spider.pull_game takes a game_id (the folder name of the game on the Gameday server) and the date. The date is necessary because if a game is postponed or (yes, it's happened this decade) preponed, the game ID might have a date different than the actual date on which the game was played.
 
 ```ruby
-# Pulls MLB's 7/4/2011 Toronto @ Boston game
-Greenmonster::Spider.pull_game('gid_2011_07_04_tormlb_bosmlb_1', {:print_games => false})
+# Pull MLB's 7/4/2011 Toronto @ Boston game
+Greenmonster::Spider.pull_game('gid_2011_07_04_tormlb_bosmlb_1', Date.new(2011,7,4))
 ```
 
 Spider.pull_day takes an hash of options as an argument. Greenmonster will create subfolders by MLB "sport_code" (MLB games fall under 'mlb', various minor league games and non-MLB/MiLB games fall under other sport code designations), and then children folders for years, months, days, and specific games. Sport code can be a string or an array of sport code strings.
 
 ```ruby
-# Pulls all MLB games for today
-Greenmonster::Spider.pull_day({:date => Date.today, :games_folder => './home/geoff/games'})
+# Pull all MLB games for today
+Greenmonster::Spider.pull_day(Date.today, 'mlb')
 
-# Pulls all rookie league games for today
-Greenmonster::Spider.pull_day({:sport_code => 'rok', :date => Date.today, :games_folder => './home/geoff/games'})
+# Pull all rookie league games for today
+Greenmonster::Spider.pull_day(Date.today, 'rok')
 
-# Pulls all games in all sport codes for today
-Greenmonster::Spider.pull_day({:all_sport_codes => true, :date => Date.today, :games_folder => './home/geoff/games'})
-
-# Pulls all games in rookie and winter league games for January 2nd, 2010
-Greenmonster::Spider.pull_day({:sport_code => ['rok','win'], :date => Date.new(2012,1,2), :games_folder => './home/geoff/games'})
+# Pull all games in all sport codes for today
+Greenmonster::SPORT_CODES.each do |sport_code|
+  Greenmonster::Spider.pull_day(Date.today, sport_code)
+end
 ```
 
 
 
-Spider.pull_days takes a range of dates to process as an argument, plus a hash of arguments to pass to Spider.pull.
+Spider.pull_days takes a range of dates to process as an argument, plus the sport code for the games (MLB.
 
 ```ruby
-# Pulls all MLB games for in April, 2012
-Greenmonster::Spider.pull_days((Date.new(2012,4,1)..Date.new(2012,4,30)), {:games_folder => './home/geoff/games'})
+# Pull all MLB games for in April, 2012
+Greenmonster::Spider.pull_days((Date.new(2012,4,1)..Date.new(2012,4,30)), 'mlb')
 ```	
 
-Mixins (ALPHA)
---------------
-(Under development.)
-
-As of version 0.4.0, Greenmonster provides the Greenmonster::Player module which can be used to extend any Ruby class you use that represents players. Include the module in your class to get Greenmonster-specific functionality like parsing players out of games.
-
-```ruby
-class MlbPlayer < ActiveRecord::Base
-   include Greenmonster::Player
-end
-
->> MlbPlayer.create_from_gameday_xml_game('gid_2011_07_04_tormlb_bosmlb_1')
-```
-
-Migrations (ALPHA)
-------------------
-
-WARNING: THIS FEATURE IS UNDER DEVELOPMENT. USE AT YOUR OWN RISK. 
-ANOTHER WARNING: Using migrations on alpha/beta/pre versions of Greenmonster may not be compatible with formal releases that come later.
-
-If you use ActiveRecord, Greenmonster provides a generator that can generate tables for Greenmonster data. Add Greenmonster to your Gemfile:
-```ruby
-gem 'greenmonster', '~> 0.4.0'
-```
-
-After you pull the gem in with Bundler, you will have access to Greenmonster generators. The Install generator attempts to install a set of standard name tables that correspond to Greenmonster data. 
 
 
 Requirements
@@ -89,19 +57,18 @@ Requirements
 - Bundler
 - Nokogiri
 - HTTParty
-- ActiveRecord (if you want to use migration generators or any mixins that involve AR saves)
 
 Testing
 -------
 
-The test suite downloads a few days of data, so it is not fast to execute.
+The test suite is being migrated to RSpec, and uses bourne.
 
 
 License
 -------
 (The MIT License)
 
-Copyright &copy; [Geoff Harcourt](http://github.com/geoffharcourt) 2012
+Copyright &copy; [Geoff Harcourt](http://github.com/geoffharcourt) 2012-2013
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ‘Software’), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
