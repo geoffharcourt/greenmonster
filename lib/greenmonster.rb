@@ -2,10 +2,10 @@ require "rubygems"
 require "bundler/setup"
 
 require 'httparty'
-require 'nokogiri'
-require 'pathname'
-require 'fileutils'
-require 'active_record'
+#require 'nokogiri'
+#require 'pathname'
+#require 'fileutils'
+#require 'active_record'
 require 'date'
 
 module Greenmonster
@@ -39,10 +39,6 @@ module Greenmonster
     @@games_folder
   end
 
-  def self.format_date_as_folder(date)
-    date.strftime("year_%Y/month_%m/day_%d")
-  end
-
   ##
   # Walk the dates in a range of dates, and execute whatever
   # methods on the date and argument set specified. Used when
@@ -50,10 +46,8 @@ module Greenmonster
   #
   #
 
-  def self.traverse_dates(range = (Date.today..Date.today), args = {})
-    range.each do |day|
-      yield day,args
-    end
+  def self.traverse_dates(range, args)
+    range.each { |day| yield day,args }
   end
 
   ##
@@ -63,21 +57,35 @@ module Greenmonster
   #
   #
 
-  def self.traverse_folders_for_date(day,args = {})
-    begin
-      folders = Dir.entries(Pathname.new(args[:games_folder] || @@games_folder) + (args[:sport_code] || 'mlb') + self.format_date_as_folder(day))
-    rescue StandardError => boom
-      puts "No files for #{day.to_s}."
-    end
-
-    unless folders.nil?
-      folders.sort.each do |gdir|
-        if gdir[0,3] == 'gid' and gdir[-4,4] != "_bak"
-          yield gdir, args
-        end
-      end
+  def self.traverse_folders_for_date(date, args)
+    game_folders_for_date_and_sport_code(date, args[:sport_code]).each do |gdir|
+      yield gdir, args
     end
   end
+
+
+  private
+
+  def self.game_folders_for_date_and_sport_code(date, sport_code)
+    folders_for_date_and_sport_code(date, sport_code).select do |folder|
+      folder[0,3] == 'gid' && folder[-4,4] != '_bak'
+    end
+  end
+
+  def self.folders_for_date_and_sport_code(date, sport_code)
+    begin
+      Dir.entries(
+        Pathname.new(games_folder) + sport_code + format_date_as_folder(date)
+      ).sort
+    rescue Errno::ENOENT
+      []
+    end
+  end
+
+  def self.format_date_as_folder(date)
+    date.strftime("year_%Y/month_%m/day_%d")
+  end
+
 end
 
 require 'greenmonster/spider'
