@@ -18,8 +18,5 @@ Gem::Specification.new do |s|
 
   s.add_dependency "nokogiri"
   s.add_dependency "httparty"
-  s.add_dependency "activerecord"
-  s.add_development_dependency "minitest", "~> 2.12"
-  s.add_development_dependency "supermodel"
-  s.add_development_dependency "sqlite3-ruby"
+  s.add_development_dependency "rspec"
 end
