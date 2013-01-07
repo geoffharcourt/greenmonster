@@ -1,18 +1,12 @@
-Sun, 18 Mar 2012 23:12:58 -0400
-./db/schema.rb	Thu, 15 Mar 2012 00:06:57 -0400
-./Gemfile	Sun, 18 Mar 2012 20:59:05 -0400
-./lib/generators/greenmonster/install_generator.rb	Sun, 18 Mar 2012 20:59:05 -0400
-./lib/generators/templates/migration.rb	Sun, 18 Mar 2012 20:59:05 -0400
-./lib/greenmonster/greenmonster.rb	Sun, 18 Mar 2012 20:59:05 -0400
-./lib/greenmonster/model_extensions/player.rb	Sun, 18 Mar 2012 21:54:28 -0400
-./lib/greenmonster/parser.rb	Sun, 18 Mar 2012 20:59:05 -0400
-./lib/greenmonster/spider.rb	Sun, 18 Mar 2012 20:59:05 -0400
-./lib/greenmonster/version.rb	Sun, 18 Mar 2012 21:45:55 -0400
-./lib/greenmonster.rb	Sun, 18 Mar 2012 22:16:43 -0400
-./Rakefile	Sun, 18 Mar 2012 20:59:05 -0400
-./test/test_create_players_from_gameday_xml_game.rb	Sun, 18 Mar 2012 22:55:14 -0400
-./test/test_greenmonster.rb	Sun, 18 Mar 2012 20:59:05 -0400
-./test/test_greenmonster_player.rb	Sun, 18 Mar 2012 22:17:18 -0400
-./test/test_greenmonster_spider.rb	Sun, 18 Mar 2012 20:59:05 -0400
-./test/test_greenmonster_traversal.rb	Sun, 18 Mar 2012 20:59:05 -0400
-./test/test_parse_players_from_gameday_xml_files.rb	Sun, 18 Mar 2012 22:34:30 -0400
+Sun, 06 Jan 2013 22:55:43 -0500
+./Gemfile	Tue, 31 Jul 2012 17:27:40 -0400
+./lib/greenmonster/spider.rb	Sun, 06 Jan 2013 19:00:15 -0500
+./lib/greenmonster/version.rb	Sun, 06 Jan 2013 19:00:15 -0500
+./lib/greenmonster.rb	Sun, 06 Jan 2013 19:00:15 -0500
+./Rakefile	Sun, 06 Jan 2013 19:00:15 -0500
+./spec/games/tst/year_2012/month_03/day_27/gid_2012_03_27_aaamlb_aabmlb_1/blank.txt	Sun, 06 Jan 2013 19:00:15 -0500
+./spec/games/tst/year_2012/month_03/day_27/gid_2012_03_27_aaamlb_aabmlb_1_bak/blank.txt	Sun, 06 Jan 2013 19:00:15 -0500
+./spec/games/tst/year_2012/month_03/day_27/not_2012_03_27_aaamlb_aabmlb_1/blank.txt	Sun, 06 Jan 2013 19:00:15 -0500
+./spec/greenmonster/spider_spec.rb	Sun, 06 Jan 2013 19:00:15 -0500
+./spec/greenmonster_spec.rb	Sun, 06 Jan 2013 19:00:15 -0500
+./spec/spec_helper.rb	Sun, 06 Jan 2013 19:00:15 -0500
