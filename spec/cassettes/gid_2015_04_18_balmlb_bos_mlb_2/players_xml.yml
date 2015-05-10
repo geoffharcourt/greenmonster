@@ -1,0 +1,46 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://gd2.mlb.com/components/game/mlb/year_2015/month_04/day_18/gid_2015_04_18_balmlb_bosmlb_2/players.xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      Server:
+      - Apache/2.0.65 (Unix)
+      Content-Type:
+      - text/html; charset=iso-8859-1
+      Content-Length:
+      - '23'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sat, 09 May 2015 15:19:08 GMT
+      X-Varnish:
+      - '1395167522'
+      Via:
+      - 1.1 varnish
+      Connection:
+      - keep-alive
+      X-Varnish-Cache:
+      - MISS
+      X-Served-By:
+      - w1cache11.web1.mlbam.net
+    body:
+      encoding: UTF-8
+      string: GameDay - 404 Not Found
+    http_version: 
+  recorded_at: Sat, 09 May 2015 15:19:08 GMT
+recorded_with: VCR 2.9.3

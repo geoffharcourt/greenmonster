@@ -1,45 +1,33 @@
-require 'spec_helper'
+require "spec_helper"
 
-describe Greenmonster do
-
-  before(:all) do
-    Greenmonster.set_games_folder("spec/games")
+RSpec.describe Greenmonster do
+  it "has a version number" do
+    expect(Greenmonster::VERSION).not_to be_nil
   end
 
-  describe ".traverse_dates" do
-
-    it "yields each date in the range with the argument hash" do
-      expect { |m|
-        Greenmonster.traverse_dates((Date.new(2012)..Date.new(2012,1,3)), {test: true}, &m)
-      }.to yield_successive_args(
-        [Date.new(2012,1,1), {test: true}],
-        [Date.new(2012,1,2), {test: true}],
-        [Date.new(2012,1,3), {test: true}]
+  describe ".local_data_location" do
+    it "returns the local data location" do
+      Greenmonster.class_variable_set(
+        :@@local_data_location,
+        "/tmp/my_custom_location"
       )
+
+      expect(Greenmonster.local_data_location).to eq("/tmp/my_custom_location")
+    end
+
+    it "raises an error if the data location isn't set" do
+      Greenmonster.class_variable_set(:@@local_data_location, nil)
+
+      expect { Greenmonster.local_data_location }.
+        to raise_error(Greenmonster::NoLocalDataLocationSet)
     end
   end
 
-  describe ".traverse_folders_for_date" do
+  describe ".set_local_data_location" do
+    it "sets the local folder for saved game data" do
+      Greenmonster.set_local_data_location("/tmp/my_custom_location")
 
-    it "yields each valid game folder (gid-format, not a backup) and the argument hash" do
-      expect { |m|
-        Greenmonster.traverse_folders_for_date(
-          Date.new(2012,3,27), {sport_code: 'tst', other_arg: 1}, &m
-        )
-      }.to yield_successive_args(
-        ["gid_2012_03_27_aaamlb_aabmlb_1", {sport_code: "tst", other_arg: 1}],
-        ["gid_2012_03_27_bbbmlb_bbcmlb_1", {sport_code: "tst", other_arg: 1}]
-      )
+      expect(Greenmonster.local_data_location).to eq("/tmp/my_custom_location")
     end
-
-    it "does not throw an exception if no folder exists for the specified date" do
-      expect {
-        Greenmonster.traverse_folders_for_date(
-          Date.new(1700,1,1), {sport_code: 'mlb'}
-        )
-      }.to_not raise_error
-    end
-
   end
-
 end
