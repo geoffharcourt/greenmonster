@@ -1,0 +1,135 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://gd2.mlb.com/components/game/mlb/year_2007/month_10/day_01/gid_2007_10_01_sdnmlb_colmlb_1/inning
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 301
+      message: Moved Permanently
+    headers:
+      Server:
+      - Apache/2.0.65 (Unix)
+      Location:
+      - http://gd2.mlb.com/components/game/mlb/year_2007/month_10/day_01/gid_2007_10_01_sdnmlb_colmlb_1/inning/
+      Cache-Control:
+      - max-age=15
+      Expires:
+      - Sat, 09 May 2015 15:20:12 GMT
+      Content-Type:
+      - text/html; charset=iso-8859-1
+      Content-Length:
+      - '311'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sat, 09 May 2015 15:19:57 GMT
+      X-Varnish:
+      - '2550137287'
+      Via:
+      - 1.1 varnish
+      Connection:
+      - keep-alive
+      X-Varnish-Cache:
+      - MISS
+      X-Served-By:
+      - w1cache10.web1.mlbam.net
+    body:
+      encoding: UTF-8
+      string: |
+        <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+        <html><head>
+        <title>301 Moved Permanently</title>
+        </head><body>
+        <h1>Moved Permanently</h1>
+        <p>The document has moved <a href="http://gd2.mlb.com/components/game/mlb/year_2007/month_10/day_01/gid_2007_10_01_sdnmlb_colmlb_1/inning/">here</a>.</p>
+        </body></html>
+    http_version: 
+  recorded_at: Sat, 09 May 2015 15:19:57 GMT
+- request:
+    method: get
+    uri: http://gd2.mlb.com/components/game/mlb/year_2007/month_10/day_01/gid_2007_10_01_sdnmlb_colmlb_1/inning/
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - Apache/2.0.65 (Unix)
+      Expires:
+      - Sat, 09 May 2015 15:20:12 GMT
+      Access-Control-Allow-Origin:
+      - "*"
+      Edge-Control:
+      - max-age=15
+      Cache-Control:
+      - max-age=15
+      Content-Type:
+      - text/html;charset=ISO-8859-1
+      Content-Length:
+      - '1219'
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sat, 09 May 2015 15:19:57 GMT
+      X-Varnish:
+      - '2550137308'
+      Via:
+      - 1.1 varnish
+      Connection:
+      - keep-alive
+      X-Varnish-Cache:
+      - MISS
+      X-Served-By:
+      - w1cache10.web1.mlbam.net
+    body:
+      encoding: UTF-8
+      string: |
+        <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+        <html>
+         <head>
+          <title>Index of /components/game/mlb/year_2007/month_10/day_01/gid_2007_10_01_sdnmlb_colmlb_1/inning</title>
+         </head>
+         <body>
+        <h1>Index of /components/game/mlb/year_2007/month_10/day_01/gid_2007_10_01_sdnmlb_colmlb_1/inning</h1>
+        <ul><li><a href="/components/game/mlb/year_2007/month_10/day_01/gid_2007_10_01_sdnmlb_colmlb_1/"> Parent Directory</a></li>
+        <li><a href="inning_1.xml"> inning_1.xml</a></li>
+        <li><a href="inning_10.xml"> inning_10.xml</a></li>
+        <li><a href="inning_11.xml"> inning_11.xml</a></li>
+        <li><a href="inning_12.xml"> inning_12.xml</a></li>
+        <li><a href="inning_13.xml"> inning_13.xml</a></li>
+        <li><a href="inning_2.xml"> inning_2.xml</a></li>
+        <li><a href="inning_3.xml"> inning_3.xml</a></li>
+        <li><a href="inning_4.xml"> inning_4.xml</a></li>
+        <li><a href="inning_5.xml"> inning_5.xml</a></li>
+        <li><a href="inning_6.xml"> inning_6.xml</a></li>
+        <li><a href="inning_7.xml"> inning_7.xml</a></li>
+        <li><a href="inning_8.xml"> inning_8.xml</a></li>
+        <li><a href="inning_9.xml"> inning_9.xml</a></li>
+        <li><a href="inning_Scores.xml"> inning_Scores.xml</a></li>
+        <li><a href="inning_hit.xml"> inning_hit.xml</a></li>
+        </ul>
+        </body></html>
+    http_version: 
+  recorded_at: Sat, 09 May 2015 15:19:57 GMT
+recorded_with: VCR 2.9.3
