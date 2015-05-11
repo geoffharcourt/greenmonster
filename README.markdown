@@ -1,7 +1,7 @@
 Greenmonster
 ============
 
-Greenmonster is a toolkit for baseball stat enthusiasts or sabermetricians to build a database of play-by-play stats from MLB's [Gameday XML data](http://gd.mlb.com/components/game/). The current tool provides the ability to spider Gameday XML data from MLB's servers for personal research. Future iterations of the tool will provide the ability to parse the data and store it in a SQL database.
+Greenmonster is a toolkit for baseball stat enthusiasts or sabermetricians to retrieve play-by-play stats from MLB's [Gameday XML data](http://gd.mlb.com/components/game/). The tool provides the ability to spider Gameday XML data from MLB's servers for personal research.
 
 Usage
 =====
@@ -31,7 +31,7 @@ Download games from a given date.
 Greenmonster::DaySpider.new(date: Date.today, sport_code: "mlb").pull
 
 # Pull all rookie league games for today
-Greenmonster::Spider.pull_day(date: Date.today, sport_code: "rok")
+Greenmonster::DaySpider(date: Date.today, sport_code: "rok").pull
 ```
 
 Requirements
