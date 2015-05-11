@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 module Greenmonster
   class FileDownloader
     def initialize(file_name:, game_path:)
@@ -29,9 +31,13 @@ module Greenmonster
       "#{Greenmonster::REMOTE_DATA_ROOT}/#{game_path}/#{file_name}"
     end
 
+    def encoded_response
+      fetch.body.force_encoding("utf-8")
+    end
+
     def write_file
       File.open(local_path, "w") do |file|
-        file.write(fetch.body)
+        file.write(encoded_response)
       end
     end
   end
