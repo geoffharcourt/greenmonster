@@ -21,7 +21,7 @@ describe Greenmonster::FileDownloader do
               "mlb/year_2015/month_04/day_18" +
               "gid_2015_04_18_balmlb_bosmlb_1/players.xml"
           )
-        ).to eq(File.read("/Users/geoff/github/geoffharcourt/greenmonster/spec/fixtures/players.xml"))
+        ).to eq(File.read(File.expand_path("../fixtures/players.xml", __FILE__)))
       end
     end
 
