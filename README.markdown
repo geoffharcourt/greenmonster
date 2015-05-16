@@ -1,3 +1,6 @@
+[![Code Climate](https://codeclimate.com/github/geoffharcourt/greenmonster/badges/gpa.svg)](https://codeclimate.com/github/geoffharcourt/greenmonster)
+[![Build Status](https://travis-ci.org/geoffharcourt/greenmonster.svg?branch=master)](https://travis-ci.org/geoffharcourt/greenmonster)
+
 Greenmonster
 ============
 
